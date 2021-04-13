@@ -45,11 +45,11 @@ window.onload = function() {
       let ary = item.products;
       let titleStr = "";
       let categoryStr = "";
+      let orderStatus = item.paid ? "已處理" : "未處理";
+      let statusClass = item.paid ? "processed" : "untreated";
       ary.forEach(function(str){
-        titleStr += `<p>${str.title}</p>`
-      });
-      ary.forEach(function(str){
-        categoryStr += `<p>${str.category}</p>`
+        titleStr += `<p class="mt-1">${str.title}</p>`
+        categoryStr += `<p class="mt-1">${str.category}</p>`
       });
       // content
       str +=`
@@ -67,7 +67,7 @@ window.onload = function() {
           </td>
           <td>${unixToDate(item.createdAt)}</td>
           <td class="orderStatus">
-            <a href="javascript:;" class="state" data-id=${item.id}>${item.paid ?'已處理':'未處理' }</a>
+            <a href="javascript:;" class="${statusClass}" data-action="status" data-id=${item.id}>${orderStatus}</a>
           </td>
           <td>
             <input type="button" class="delSingleOrder-Btn" data-id=${item.id} value="刪除">
@@ -80,15 +80,16 @@ window.onload = function() {
   // 修改單筆訂單狀態
   function editOrderItem(e){
     let putId = e.target.getAttribute("data-id");
-    if (e.target.getAttribute('class') !== "state") {
+    let paidStatus = false;
+    if(e.target.getAttribute('data-action') !== "status"){
       return;
-    } else if (e.target.textContent === "已處理"){
-      return;
-    }
+    } 
+    else if (e.target.textContent === "未處理")paidStatus = true;
+    else paidStatus = false;
     let putObj ={
       "data": {
         "id": putId,
-        "paid": true
+        "paid": paidStatus
       }
     }
     axios.put(`${url}/api/livejs/v1/admin/${apiPath}/orders/`, putObj , tokenObj)
