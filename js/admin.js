@@ -41,12 +41,18 @@ window.onload = function() {
   function renderOrder(data){
     let str = "";
     data.forEach(function(item , idx){
-      //console.log(item);
-      // 同筆訂單產品
-      let productAry = item.products; 
-      // console.log(productAry);
-      productAry.forEach(function(product , idx){
-        str +=`
+      // 同筆商品字串
+      let ary = item.products;
+      let titleStr = "";
+      let categoryStr = "";
+      ary.forEach(function(str){
+        titleStr += `<p>${str.title}</p>`
+      });
+      ary.forEach(function(str){
+        categoryStr += `<p>${str.category}</p>`
+      });
+      // content
+      str +=`
         <tr>
           <td>${item.id}</td>
           <td>
@@ -55,9 +61,9 @@ window.onload = function() {
           </td>
           <td>${item.user.address}</td>
           <td>${item.user.email}</td>
-          <td>${productAry[idx].category}</td>
+          <td>${categoryStr}</td>
           <td>
-            <p>${productAry[idx].title}</p>
+            <p>${titleStr}</p>
           </td>
           <td>${unixToDate(item.createdAt)}</td>
           <td class="orderStatus">
@@ -67,8 +73,7 @@ window.onload = function() {
             <input type="button" class="delSingleOrder-Btn" data-id=${item.id} value="刪除">
           </td>
         </tr>
-        `
-      })
+      `
     });
     orderList.innerHTML = str;
   };
@@ -146,7 +151,7 @@ window.onload = function() {
       return [item , obj[item]];
     });
     [ c3Data[0],c3Data[1],c3Data[2]] = [ c3Data[1],c3Data[0],c3Data[2]] ;
-    console.log(c3Data);
+    // console.log(c3Data);
     c3render(c3Data);
   };
   // c3render
