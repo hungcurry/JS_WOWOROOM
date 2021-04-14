@@ -32,6 +32,7 @@ window.onload = function() {
       orderData = res.data.orders;
       renderOrder(orderData);
       c3Data(orderData);
+      c3Data_lv2(orderData);
     })
     .catch(err =>{
       console.log(err);
@@ -41,12 +42,18 @@ window.onload = function() {
   function renderOrder(data){
     let str = "";
     data.forEach(function(item , idx){
-      //console.log(item);
-      // 同筆訂單產品
-      let productAry = item.products; 
-      // console.log(productAry);
-      productAry.forEach(function(product , idx){
-        str +=`
+      // 同筆商品字串
+      let ary = item.products;
+      let titleStr = "";
+      let categoryStr = "";
+      let orderStatus = item.paid ? "已處理" : "未處理";
+      let statusClass = item.paid ? "processed" : "untreated";
+      ary.forEach(function(str){
+        titleStr += `<p class="mt-1">${str.title}</p>`
+        categoryStr += `<p class="mt-1">${str.category}</p>`
+      });
+      // content
+      str +=`
         <tr>
           <td>${item.id}</td>
           <td>
@@ -55,35 +62,35 @@ window.onload = function() {
           </td>
           <td>${item.user.address}</td>
           <td>${item.user.email}</td>
-          <td>${productAry[idx].category}</td>
+          <td>${categoryStr}</td>
           <td>
-            <p>${productAry[idx].title}</p>
+            <p>${titleStr}</p>
           </td>
           <td>${unixToDate(item.createdAt)}</td>
           <td class="orderStatus">
-            <a href="javascript:;" class="state" data-id=${item.id}>${item.paid ?'已處理':'未處理' }</a>
+            <a href="javascript:;" class="${statusClass}" data-action="status" data-id=${item.id}>${orderStatus}</a>
           </td>
           <td>
             <input type="button" class="delSingleOrder-Btn" data-id=${item.id} value="刪除">
           </td>
         </tr>
-        `
-      })
+      `
     });
     orderList.innerHTML = str;
   };
   // 修改單筆訂單狀態
   function editOrderItem(e){
     let putId = e.target.getAttribute("data-id");
-    if (e.target.getAttribute('class') !== "state") {
+    let paidStatus = false;
+    if(e.target.getAttribute('data-action') !== "status"){
       return;
-    } else if (e.target.textContent === "已處理"){
-      return;
-    }
+    } 
+    else if (e.target.textContent === "未處理")paidStatus = true;
+    else paidStatus = false;
     let putObj ={
       "data": {
         "id": putId,
-        "paid": true
+        "paid": paidStatus
       }
     }
     axios.put(`${url}/api/livejs/v1/admin/${apiPath}/orders/`, putObj , tokenObj)
@@ -125,43 +132,84 @@ window.onload = function() {
   // ====================
   // c3資料處理
   function c3Data(data){
-    let ary = orderData.map(function(item){
-      return item.products;
+    // 全類別營收比重
+    let categoryObj = {};
+    data.forEach(function(item){
+      item.products.forEach(function(product){
+        if (categoryObj[product.category] === undefined) {
+          categoryObj[product.category] = product.price * product.quantity;
+        } else {
+          categoryObj[product.category] += product.price * product.quantity;
+        }
+      });
     });
-    let productsAry = [];
-    ary.forEach(function(item){
-      if(item.length >= 1) productsAry.push(...item);
+    let categoryKey = Object.keys(categoryObj);
+    let categoryAry = categoryKey.map(function(item){
+      return [ item , categoryObj[item] ];
     });
-    let obj = {}; // {收納: 2, 床架: 2, 窗簾: 1}
-    productsAry.forEach(function(item){
-      if(obj[item.category] === undefined){
-        obj[item.category] = 1;
-      }else{
-        obj[item.category] += 1;
-      }
-    });
-    let objKeyAry = Object.keys(obj);  // ["收納", "床架", "窗簾"]
-
-    let c3Data = objKeyAry.map(function(item){
-      return [item , obj[item]];
-    });
-    [ c3Data[0],c3Data[1],c3Data[2]] = [ c3Data[1],c3Data[0],c3Data[2]] ;
-    console.log(c3Data);
-    c3render(c3Data);
+    [categoryAry[0] , categoryAry[1] ,categoryAry[2]] = [categoryAry[1] , categoryAry[0] ,categoryAry[2]]
+    categoryChart(categoryAry);
   };
-  // c3render
-  function c3render(data){
+  // categoryChart
+  function categoryChart(data){
     let chart = c3.generate({
       bindto: '#chart',
       data: {
-          type: "pie",
-          columns: data,
-          colors:{
-            "床架":"#DACBFF",
-            "收納":"#9D7FEA",
-            "窗簾":"#5434A7",
-          }
+        type: "pie",
+        columns: data,
+        colors:{
+          "床架":"#DACBFF",
+          "收納":"#9D7FEA",
+          "窗簾":"#5434A7",
+        },
+      }
+    });
+  };
+  function c3Data_lv2(data){
+    // 全品項營收比重
+    let projectObj = {};
+    data.forEach(function(item){
+      item.products.forEach(function(product){
+        if (projectObj[product.title] === undefined) {
+          projectObj[product.title] = product.price * product.quantity;
+        } else {
+          projectObj[product.title] += product.price * product.quantity;
+        }
+      });
+    });
+    projectKey = Object.keys(projectObj);
+    let projectAry = projectKey.map(function(item){
+      return [ item , projectObj[item] ];
+    });
+    // sort
+    let projectArySort = projectAry.sort(function(a,b){
+      let valueA = a[1];
+      let valueB = b[1];
+      return valueB - valueA;
+    });
+    // 重構資料-篩選出前三名營收品項
+    let total = 0;
+    if (projectArySort.length > 3) {
+      projectArySort.filter(function(product,idx){
+        if (idx > 2) total += product[1];
+      });
+    }
+    projectArySort.splice(3 , projectArySort.length);
+    projectArySort.push(["其他" , total]);
+
+    projectChart(projectArySort);
+  };
+  // projectChart
+  function projectChart(data){
+    let chart2 = c3.generate({
+      bindto: '#chart2',
+      data: {
+        type: "pie",
+        columns: data
       },
+      color: {
+        pattern: ["#301E5F", "#5434A7", "#9D7FEA", "#DACBFD"],
+      }
     });
   };
   // ====================

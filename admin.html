@@ -15,11 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
     <link rel="stylesheet" href="./css/style.css">
   </head>
-  <style>
-    * {
-      /* outline: 1px solid red; */
-    }
-  </style>
+
 <body>
   <nav class="topBar">
     <div class="wrap">
@@ -34,8 +30,16 @@
     </div>
   </nav>
   <section class="wrap">
-      <h2 class="section-title">全產品類別營收比重</h2>
-      <div id="chart"></div>
+    <div class="flexbox">
+      <div class="group">
+        <h2 class="section-title">全產品類別營收比重</h2>
+        <div id="chart"></div>
+      </div>
+      <div class="group">
+        <h2 class="section-title">全品項營收比重</h2>
+        <div id="chart2"></div>
+      </div>
+    </div>
   </section>
   <!-- 產品清單 -->
   <section class="wrap orderPage-list">
@@ -44,15 +48,15 @@
           <table class="orderPage-table">
               <thead>
                   <tr>
-                      <th>訂單編號</th>
-                      <th>聯絡人</th>
-                      <th>聯絡地址</th>
-                      <th>電子郵件</th>
-                      <th width="55px">類別</th>
-                      <th>訂單品項</th>
-                      <th>訂單日期</th>
-                      <th width="85px">訂單狀態</th>
-                      <th>操作</th>
+                    <th>訂單編號</th>
+                    <th>聯絡人</th>
+                    <th>聯絡地址</th>
+                    <th>電子郵件</th>
+                    <th width="55px">類別</th>
+                    <th>訂單品項</th>
+                    <th>訂單日期</th>
+                    <th width="85px">訂單狀態</th>
+                    <th>操作</th>
                   </tr>
               </thead>
               <tbody class="orderPage-table__tbody">
@@ -110,3 +114,7 @@
   <script src="./js/admin.js"></script>
 </body>
 </html>
+
+
+
+
