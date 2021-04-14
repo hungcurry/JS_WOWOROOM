@@ -32,6 +32,7 @@ window.onload = function() {
       orderData = res.data.orders;
       renderOrder(orderData);
       c3Data(orderData);
+      c3Data_lv2(orderData);
     })
     .catch(err =>{
       console.log(err);
@@ -131,43 +132,84 @@ window.onload = function() {
   // ====================
   // c3資料處理
   function c3Data(data){
-    let ary = orderData.map(function(item){
-      return item.products;
+    // 全類別營收比重
+    let categoryObj = {};
+    data.forEach(function(item){
+      item.products.forEach(function(product){
+        if (categoryObj[product.category] === undefined) {
+          categoryObj[product.category] = product.price * product.quantity;
+        } else {
+          categoryObj[product.category] += product.price * product.quantity;
+        }
+      });
     });
-    let productsAry = [];
-    ary.forEach(function(item){
-      if(item.length >= 1) productsAry.push(...item);
+    let categoryKey = Object.keys(categoryObj);
+    let categoryAry = categoryKey.map(function(item){
+      return [ item , categoryObj[item] ];
     });
-    let obj = {}; // {收納: 2, 床架: 2, 窗簾: 1}
-    productsAry.forEach(function(item){
-      if(obj[item.category] === undefined){
-        obj[item.category] = 1;
-      }else{
-        obj[item.category] += 1;
-      }
-    });
-    let objKeyAry = Object.keys(obj);  // ["收納", "床架", "窗簾"]
-
-    let c3Data = objKeyAry.map(function(item){
-      return [item , obj[item]];
-    });
-    [ c3Data[0],c3Data[1],c3Data[2]] = [ c3Data[1],c3Data[0],c3Data[2]] ;
-    // console.log(c3Data);
-    c3render(c3Data);
+    [categoryAry[0] , categoryAry[1] ,categoryAry[2]] = [categoryAry[1] , categoryAry[0] ,categoryAry[2]]
+    categoryChart(categoryAry);
   };
-  // c3render
-  function c3render(data){
+  // categoryChart
+  function categoryChart(data){
     let chart = c3.generate({
       bindto: '#chart',
       data: {
-          type: "pie",
-          columns: data,
-          colors:{
-            "床架":"#DACBFF",
-            "收納":"#9D7FEA",
-            "窗簾":"#5434A7",
-          }
+        type: "pie",
+        columns: data,
+        colors:{
+          "床架":"#DACBFF",
+          "收納":"#9D7FEA",
+          "窗簾":"#5434A7",
+        },
+      }
+    });
+  };
+  function c3Data_lv2(data){
+    // 全品項營收比重
+    let projectObj = {};
+    data.forEach(function(item){
+      item.products.forEach(function(product){
+        if (projectObj[product.title] === undefined) {
+          projectObj[product.title] = product.price * product.quantity;
+        } else {
+          projectObj[product.title] += product.price * product.quantity;
+        }
+      });
+    });
+    projectKey = Object.keys(projectObj);
+    let projectAry = projectKey.map(function(item){
+      return [ item , projectObj[item] ];
+    });
+    // sort
+    let projectArySort = projectAry.sort(function(a,b){
+      let valueA = a[1];
+      let valueB = b[1];
+      return valueB - valueA;
+    });
+    // 重構資料-篩選出前三名營收品項
+    let total = 0;
+    if (projectArySort.length > 3) {
+      projectArySort.filter(function(product,idx){
+        if (idx > 2) total += product[1];
+      });
+    }
+    projectArySort.splice(3 , projectArySort.length);
+    projectArySort.push(["其他" , total]);
+
+    projectChart(projectArySort);
+  };
+  // projectChart
+  function projectChart(data){
+    let chart2 = c3.generate({
+      bindto: '#chart2',
+      data: {
+        type: "pie",
+        columns: data
       },
+      color: {
+        pattern: ["#301E5F", "#5434A7", "#9D7FEA", "#DACBFD"],
+      }
     });
   };
   // ====================
