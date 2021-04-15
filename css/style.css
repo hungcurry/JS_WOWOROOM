@@ -625,9 +625,6 @@ body {
   border-bottom: 1px solid #B9B9B9;
 }
 
-/* .shoppingCart-table tr:first-child, .shoppingCart-table tr:last-child {
-  border-bottom: 0;
-} */
 
 @media (max-width: 992px) {
   .shoppingCart-table {
@@ -653,6 +650,23 @@ body {
 .cardItem-title img {
   margin-right: 15px;
   max-width: 80px;
+}
+
+.cardItem__quantity{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.minus, .add , .delete{
+  vertical-align: middle;
+  cursor: pointer; 
+  user-select: none;
+}
+.minus:hover, .add:hover{
+  color: #6A33F8;
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .discardBtn {
