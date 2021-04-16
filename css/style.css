@@ -70,7 +70,7 @@ img {
 
 body {
   font-family: 'Noto Sans', sans-serif;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .wrap {
@@ -79,7 +79,7 @@ body {
 }
 
 .topBar {
-  border-bottom: 40px solid #212529;;
+  border-bottom: 1px solid #212529;;
   margin-bottom: 30px;
 }
 
@@ -107,7 +107,7 @@ body {
 .topBar a {
   display: block;
   text-decoration: none;
-  color: #000000;
+  color: #444444;
   font-size: 1.25rem;
 }
 
@@ -131,8 +131,9 @@ body {
 }
 
 .topBar-menu a {
-  padding: 36px 24px;
+  padding: 20px 24px;
   background-color: #FFFFFF;
+  position: relative;
 }
 
 .topBar-menu a:hover {
@@ -142,6 +143,13 @@ body {
 
 .topBar-menu li:last-child a {
   padding-right: 0;
+}
+
+.person{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @media (max-width: 767px) {
@@ -192,8 +200,9 @@ body {
 }
 
 .logo {
-  padding: 36px 0;
+  padding: 20px 0;
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 @media (max-width: 767px) {
@@ -204,7 +213,8 @@ body {
 
 .banner {
   position: relative;
-  background-image: url("https://github.com/hexschool/js-training/blob/main/%E7%AC%AC%E4%B9%9D%E9%80%B1%E4%B8%BB%E7%B7%9A%E4%BB%BB%E5%8B%99%E5%9C%96%E5%BA%AB/3ewLAKn.png?raw=true");
+  /* background-image: url("https://github.com/hexschool/js-training/blob/main/%E7%AC%AC%E4%B9%9D%E9%80%B1%E4%B8%BB%E7%B7%9A%E4%BB%BB%E5%8B%99%E5%9C%96%E5%BA%AB/3ewLAKn.png?raw=true"); */
+  background-image: url("../images/banner.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -223,8 +233,9 @@ body {
 
 .section-title {
   text-align: center;
-  font-size: 1.75rem;
-  margin-bottom: 30px;
+  font-size: 1.5rem; 
+  /* 1.75rem */
+  margin-bottom: 20px;
 }
 
 .bedAdvantage {
@@ -295,6 +306,13 @@ body {
           transform: scale(1.5);
 }
 
+.noInfo{
+  text-align: center;
+  color: #6A33F8;
+  font-size: 22px;
+  padding: 20px 0px;
+}
+
 @media (max-width: 767px) {
   .compare-table {
     width: 500px;
@@ -315,13 +333,13 @@ body {
 }
 
 .recommendation {
-  background-color: #301E5F;
+  background-color: #dfdeda;
   padding: 60px 0;
 }
 
-.recommendation h3 {
+/* .recommendation h3 {
   color: #FFFFFF;
-}
+} */
 
 @media (max-width: 767px) {
   .recommendation {
@@ -446,7 +464,7 @@ body {
   position: absolute;
   top: 49px;
   right: -55px;
-  border: 10px solid #000000;
+  border: 10px solid #444444;
   border-top: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid transparent;
@@ -456,7 +474,7 @@ body {
   .transport-intro li:nth-child(1)::after, .transport-intro li:nth-child(2)::after, .transport-intro li:nth-child(3)::after {
     position: static;
     margin-top: 25px;
-    border: 10px solid #000000;
+    border: 10px solid #444444;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
@@ -482,7 +500,7 @@ body {
 .transport-card .cardImg {
   width: 115px;
   height: 115px;
-  border: 3px solid #000000;
+  border: 3px solid #444444;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -550,7 +568,7 @@ body {
 
 .productCard a {
   display: block;
-  background-color: #000000;
+  background-color: #444444;
   color: #ffffff;
   padding: 10px 0;
   text-align: center;
@@ -587,7 +605,7 @@ body {
   position: absolute;
   top: 13px;
   right: -5px;
-  background-color: #000000;
+  background-color: #444444;
   color: #ffffff;
   padding: 8px 24px;
 }
@@ -678,7 +696,7 @@ body {
   display: inline-block;
   padding: 10px;
   font-size: 2rem;
-  color: #000000;
+  color: #444444;
 }
 
 .discardBtn a:hover {
@@ -691,14 +709,14 @@ body {
   display: inline-block;
   text-decoration: none;
   padding: 5px 15px;
-  color: #000000;
-  border: 1.3px solid #000000;
+  color: #444444;
+  border: 1.3px solid #444444;
   border-radius: 5px;
   font-size: 1.25rem;
 }
 
 .discardAllBtn:hover {
-  background-color: #000000;
+  background-color: #444444;
   color: #FFFFFF;
 }
 
@@ -755,7 +773,7 @@ body {
   display: block;
   min-width: 255px;
   min-height: 48px;
-  background-color: #000000;
+  background-color: #444444;
   color: #FFFFFF;
   border: 0;
   cursor: pointer;
@@ -770,7 +788,7 @@ body {
 
 .orderPage-list {
   max-width: 1330px;
-  padding: 60px 10px;
+  padding: 30px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -783,30 +801,33 @@ body {
 .orderPage-list .discardAllBtn {
   -ms-flex-item-align: end;
       align-self: flex-end;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .orderPage-table {
-  border: 1px solid #000000;
+  /* border: 1px solid #444444; */
   width: 100%;
 }
 
 .orderPage-table thead{
-  background-color: #212529;
-  color: #fff;
+  /* background-color: #212529; */
+  color: #212529;
   text-align: center;
+}
+thead tr{
+  border-bottom: 1px solid #212529;
 }
 .orderPage-table__tbody tr:nth-child(2n){
   background-color: #f8f9fa;
 }
 .orderPage-table__tbody tr:hover{
-  background-color: #dee2e6;
+  background-color: #eee;
 }
 
 .orderPage-table th, .orderPage-table td {
   padding: 10px;
   text-align: center;
-  border: 1px solid #000000;
+  /* border: 1px solid #444444; */
 }
 
 @media (max-width: 1110px) {
@@ -841,11 +862,11 @@ body {
   right: 0;
   left: 0;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
 }
 .orderStatus .processed{
-  color: #0067CE;
+  color: #6A33F8;
   text-decoration: none;
 }
 .orderStatus .untreated{
@@ -856,11 +877,11 @@ body {
 }
 
 .orderStatus-unDone:hover {
-  background-color: #000000;
+  background-color: #444444;
 }
 
 .orderStatus-done {
-  background-color: #000000;
+  background-color: #444444;
 }
 
 .orderStatus-done:hover {
@@ -897,11 +918,45 @@ body {
     margin-bottom: 30px;
   }
 }
+.footer{
+  border-top: 1px solid #eeeeee;
+  padding: 15px 0px;
+  background-color: #F8f8f8;
+}
+.container{
+  max-width: 1140px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__log{
+  text-decoration: none;
+  color: #444444;
+  font-size: 1.25rem;
+}
+
 
 /* Utilities */
 .mt-1{
   margin-top: 4px;
 }
-/* * {
-  outline: 1px solid red;
-} */
+.mr-2{
+  margin-right: 8px;
+}
+.topBar-menu .active {
+  color: #6A33F8;
+}
+.d-flex{
+  display: flex;
+}
+.text-secondary{
+  color: #444444;
+  text-decoration: none;
+}
+select{
+  background-color: #fff;
+}
+* {
+  /* outline: 1px solid red; */
+}
+

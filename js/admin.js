@@ -7,6 +7,7 @@ window.onload = function() {
   // orderProducts
   const orderList = document.querySelector('.orderPage-table__tbody');
   const deleteAllOrderBtn = document.querySelector('.discardAllBtn');
+  const chart = document.querySelector('.js-chart');
   let orderData = [];
   let tokenObj = {
     headers: {
@@ -30,9 +31,14 @@ window.onload = function() {
     axios.get(`${url}/api/livejs/v1/admin/${apiPath}/orders`, tokenObj)
     .then(res => {
       orderData = res.data.orders;
-      renderOrder(orderData);
-      c3Data(orderData);
-      c3Data_lv2(orderData);
+      if (orderData.length > 0) {
+        renderOrder(orderData);
+        c3Data(orderData);
+        c3Data_lv2(orderData);
+      }else{
+        orderList.innerHTML ="";
+        chart.innerHTML = `<p class="noInfo">目前尚未有訂單</p>`
+      }
     })
     .catch(err =>{
       console.log(err);
@@ -120,6 +126,7 @@ window.onload = function() {
   };
   // 刪除全部訂單
   function deleteAllOrder(e) {
+    if (orderData.length === 0) return;
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders`, tokenObj)
     .then(function (res) {
       alert("刪除 全部訂單 成功")
@@ -147,8 +154,10 @@ window.onload = function() {
     let categoryAry = categoryKey.map(function(item){
       return [ item , categoryObj[item] ];
     });
-    [categoryAry[0] , categoryAry[1] ,categoryAry[2]] = [categoryAry[1] , categoryAry[0] ,categoryAry[2]]
+
+    document.querySelector(".categoryChart").textContent = "全類別營收比重";
     categoryChart(categoryAry);
+
   };
   // categoryChart
   function categoryChart(data){
@@ -193,10 +202,10 @@ window.onload = function() {
       projectArySort.filter(function(product,idx){
         if (idx > 2) total += product[1];
       });
+      projectArySort.splice(3 , projectArySort.length);
+      projectArySort.push(["其他" , total]);
     }
-    projectArySort.splice(3 , projectArySort.length);
-    projectArySort.push(["其他" , total]);
-
+    document.querySelector(".projectChart").textContent = "全品項營收比重";
     projectChart(projectArySort);
   };
   // projectChart

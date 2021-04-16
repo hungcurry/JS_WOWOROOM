@@ -16,21 +16,10 @@
     <link rel="stylesheet" href="./css/style.css">
   </head>
 
-  <style>
-    #bedAdvantage {
-      display: none;
-    }
-    .furniture-compare,
-    .recommendation,
-    .transport {
-      display: none;
-    }
-  </style>
-
 <body>
   <nav class="topBar">
     <div class="wrap">
-      <h1><a href="#" class="logo">WOWOROOM</a></h1>
+      <h1><a href="./index.html" class="logo">WOWOROOM</a></h1>
       <span class="material-icons menuToggle">
         menu
       </span>
@@ -39,7 +28,9 @@
         <li><a href="#recommendation">好評推薦</a></li>
         <li><a href="#transport">運送方式</a></li>
         <li><a href="#orderInfo">立即預訂</a></li>
+        <li><a href="./admin.html" class="active"><i class="material-icons person">person</i>後台登入</a></li>
       </ul>
+  
     </div>
   </nav>
   <section class="wrap" id="bedAdvantage">
@@ -122,7 +113,7 @@
               <div class="recommend-img">
                 <img src="https://i.imgur.com/I9L7WOr.png" alt="">
                 <div>
-                  <p>王六角</p>
+                  <p>白爛貓</p>
                   <p class="recommend-text">Jodan 雙人床架</p>
                 </div>
               </div>
@@ -135,7 +126,7 @@
               <div class="recommend-img">
                 <img src="https://i.imgur.com/CUFGfay.png" alt="">
                 <div>
-                  <p>Leaf</p>
+                  <p>麻糬</p>
                   <p class="recommend-text">Antony 雙人床架</p>
                 </div>
               </div>
@@ -191,7 +182,7 @@
               <div class="recommend-img">
                 <img src="https://i.imgur.com/W7fyzp2.png" alt="">
                 <div>
-                  <p>小杰</p>
+                  <p>跩跩</p>
                   <p class="recommend-text">Louvre 雙人床架</p>
                 </div>
               </div>
@@ -206,7 +197,7 @@
                   src="https://github.com/hexschool/js-training/blob/main/%E7%AC%AC%E4%B9%9D%E9%80%B1%E4%B8%BB%E7%B7%9A%E4%BB%BB%E5%8B%99%E5%9C%96%E5%BA%AB/8O1cOnG.png?raw=true"
                   alt="">
                 <div>
-                  <p>江八角</p>
+                  <p>魚魚</p>
                   <p class="recommend-text">Charles 雙人床架</p>
                 </div>
               </div>
@@ -219,7 +210,7 @@
               <div class="recommend-img">
                 <img src="https://i.imgur.com/C0NDvSA.png" alt="">
                 <div>
-                  <p>juni讚神</p>
+                  <p>小杰杰</p>
                   <p class="recommend-text">Antony 床邊桌</p>
                 </div>
               </div>
@@ -325,14 +316,14 @@
     <h3 class="section-title">我的購物車</h3>
     <div class="overflowWrap">
       <table class="shoppingCart-table">
-        <thead>
-          <tr>
+        <thead class="thead">
+          <!-- <tr>
             <th width="35%">品項</th>
             <th width="15%">單價</th>
             <th width="15%">數量</th>
             <th width="15%">金額</th>
             <th width="20%"></th>
-          </tr>
+          </tr> -->
         </thead>
         <tbody class="tbody">
           <!-- <tr>
@@ -349,8 +340,8 @@
               <a href="#" class="material-icons">
                 clear
               </a>
-            </td> -->
-          </tr>
+            </td>
+          </tr> -->
         </tbody>
         <tfoot>
           <tr>
@@ -425,6 +416,25 @@
       <input type="submit" value="送出預訂資料" class="orderInfo-btn">
     </form>
   </section>
+  <footer class="footer">
+    <div class="container d-flex">
+        <h1 class="">
+            <a class="logo footer__log" href="./index.html">WOWOROOM</a>
+        </h1>
+        <p >© 2021 WOWOROOM.All Rights Reserved.</p>
+        <ul class="d-flex">
+            <li class="mr-2">
+                <a href="javaScript:;" class="material-icons text-secondary">facebook</a>
+            </li>
+            <li class="mr-2">
+              <a href="javaScript:;" class="material-icons text-secondary">call</a>
+          </li>
+            <li>
+                <a href="javaScript:;" class="material-icons text-secondary">mail_outline</a>
+            </li>
+        </ul>
+    </div>
+  </footer>
 
   <!-- 預設 JS，請同學不要修改此處 -->
   <script>
@@ -495,3 +505,4 @@
   <script src="./js/script.js"></script>
 </body>
 </html>
+

@@ -19,24 +19,24 @@
 <body>
   <nav class="topBar">
     <div class="wrap">
-        <h1><a href="#" class="logo">WOWOROOM</a></h1>
+        <h1><a href="./index.html" class="logo">WOWOROOM</a></h1>
         <span class="material-icons menuToggle">
             menu
         </span>
         <ul class="topBar-menu">
             <li><a href="#">後台管理</a></li>
-            <li><a href="#">管理員登入</a></li>
+            <li><a href="#" class="active"><i class="material-icons person">person</i>管理員登入中</a></li>
         </ul>
     </div>
   </nav>
   <section class="wrap">
-    <div class="flexbox">
+    <div class="flexbox js-chart">
       <div class="group">
-        <h2 class="section-title">全產品類別營收比重</h2>
+        <h2 class="section-title categoryChart"></h2>
         <div id="chart"></div>
       </div>
       <div class="group">
-        <h2 class="section-title">全品項營收比重</h2>
+        <h2 class="section-title projectChart"></h2>
         <div id="chart2"></div>
       </div>
     </div>
@@ -48,15 +48,15 @@
           <table class="orderPage-table">
               <thead>
                   <tr>
-                    <th>訂單編號</th>
-                    <th>聯絡人</th>
-                    <th>聯絡地址</th>
-                    <th>電子郵件</th>
-                    <th width="55px">類別</th>
-                    <th>訂單品項</th>
-                    <th>訂單日期</th>
-                    <th width="85px">訂單狀態</th>
-                    <th>操作</th>
+                      <th>訂單編號</th>
+                      <th>聯絡人</th>
+                      <th>聯絡地址</th>
+                      <th>電子郵件</th>
+                      <th width="55px">類別</th>
+                      <th>訂單品項</th>
+                      <th>訂單日期</th>
+                      <th width="85px">訂單狀態</th>
+                      <th>操作</th>
                   </tr>
               </thead>
               <tbody class="orderPage-table__tbody">
@@ -83,6 +83,25 @@
           </table>
       </div>
   </section>
+  <footer class="footer">
+    <div class="container d-flex">
+        <h1 class="">
+            <a class="logo footer__log" href="./index.html">WOWOROOM</a>
+        </h1>
+        <p >© 2021 WOWOROOM.All Rights Reserved.</p>
+        <ul class="d-flex">
+            <li class="mr-2">
+                <a href="javaScript:;" class="material-icons text-secondary">facebook</a>
+            </li>
+            <li class="mr-2">
+              <a href="javaScript:;" class="material-icons text-secondary">call</a>
+          </li>
+            <li>
+                <a href="javaScript:;" class="material-icons text-secondary">mail_outline</a>
+            </li>
+        </ul>
+    </div>
+  </footer>
 
   <!-- 預設 JS，請同學不要修改此處 -->
   <script>
@@ -114,7 +133,5 @@
   <script src="./js/admin.js"></script>
 </body>
 </html>
-
-
 
 

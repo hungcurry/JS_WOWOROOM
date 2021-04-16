@@ -8,6 +8,7 @@ window.onload = function () {
   const productSelect = document.querySelector('.productSelect');
   // carts
   const shoppingCart = document.querySelector('.shoppingCart-table');
+  const thead = document.querySelector('.thead');
   const tbody = document.querySelector('.tbody');
   const cartTotal = document.querySelector('.cartTotal');
   const deleteAllCartBtn = document.querySelector('.discardAllBtn');
@@ -136,33 +137,50 @@ window.onload = function () {
   };
   // renderCarts
   function renderCarts(data) {
-    let str = "";
-    data.carts.forEach(function (item) {
-      str += `
+    if (cartData.carts.length > 0) {
+      let theadStr = "";
+      let str = "";
+      theadStr= `
       <tr>
-        <td>
-          <div class="cardItem-title">
-            <img src="${item.product.images}" alt="${item.product.title}">
-            <p>${item.product.title}</p>
-          </div>
-        </td>
-        <td>NT$${formatPrice(item.product.price.toString())}</td>
-        <td>
-          <span class="material-icons minus" data-action="minus" data-id="${item.id}">remove</span>
-          <input type="text" value="${item.quantity}" class="cardItem__quantity" readonly="readonly">
-          <span class="material-icons add" data-action="add" data-id="${item.id}">add</span>
-        </td>
-        <td>NT$${formatPrice((item.product.price * item.quantity).toString())}</td>
-        <td class="discardBtn">
-          <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
-            clear
-          </a>
-        </td>
-    </tr>
+        <th width="35%">品項</th>
+        <th width="15%">單價</th>
+        <th width="15%">數量</th>
+        <th width="15%">金額</th>
+        <th width="20%"></th>
+      </tr>
       `
-    });
-    tbody.innerHTML = str;
-    cartTotal.textContent = `NT$${formatPrice(cartData.finalTotal.toString())}`
+      data.carts.forEach(function (item) {
+        str += `
+        <tr>
+          <td>
+            <div class="cardItem-title">
+              <img src="${item.product.images}" alt="${item.product.title}">
+              <p>${item.product.title}</p>
+            </div>
+          </td>
+          <td>NT$${formatPrice(item.product.price.toString())}</td>
+          <td>
+            <span class="material-icons minus" data-action="minus" data-id="${item.id}">remove</span>
+            <input type="text" value="${item.quantity}" class="cardItem__quantity" readonly="readonly">
+            <span class="material-icons add" data-action="add" data-id="${item.id}">add</span>
+          </td>
+          <td>NT$${formatPrice((item.product.price * item.quantity).toString())}</td>
+          <td class="discardBtn">
+            <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
+              clear
+            </a>
+          </td>
+      </tr>
+        `
+      });
+      thead.innerHTML = theadStr;
+      tbody.innerHTML = str;
+      cartTotal.textContent = `NT$${formatPrice(cartData.finalTotal.toString())}`;
+    } else {
+      cartTotal.textContent = `NT$ 0`;
+      thead.innerHTML = "";
+      tbody.innerHTML = `<tr><td colspan ="5"><p class="noInfo">目前尚未有商品</p></td></tr>`;
+    }
   };
   // 加入購物車
   function addCart(e) {
@@ -337,7 +355,6 @@ window.onload = function () {
   shoppingCart.addEventListener("click", patchCartItem);
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
-
 };
 
 
