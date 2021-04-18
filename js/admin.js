@@ -8,6 +8,7 @@ window.onload = function() {
   const orderList = document.querySelector('.orderPage-table__tbody');
   const deleteAllOrderBtn = document.querySelector('.discardAllBtn');
   const chart = document.querySelector('.js-chart');
+  const modal = document.querySelector('.modal');
   let orderData = [];
   let tokenObj = {
     headers: {
@@ -25,6 +26,9 @@ window.onload = function() {
     let date = new Date(unixTimestamp*1000);
     return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
   };
+  function formatPrice(num) {
+    return num.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  }
   // ====================
   // 取得後台訂單列表
   function getOrderList(){
@@ -50,12 +54,12 @@ window.onload = function() {
     data.forEach(function(item , idx){
       // 同筆商品字串
       let ary = item.products;
-      let titleStr = "";
+      // let titleStr = "";
       let categoryStr = "";
       let orderStatus = item.paid ? "已處理" : "未處理";
       let statusClass = item.paid ? "processed" : "untreated";
       ary.forEach(function(str){
-        titleStr += `<p class="mt-1">${str.title}</p>`
+        // titleStr += `<p class="mt-1">${str.title}</p>`
         categoryStr += `<p class="mt-1">${str.category}</p>`
       });
       // content
@@ -70,7 +74,10 @@ window.onload = function() {
           <td>${item.user.email}</td>
           <td>${categoryStr}</td>
           <td>
-            <p>${titleStr}</p>
+            <a 
+            class="orderInfoMore text-primary js-check"
+            data-info ="${idx}"
+            >查看更多</a>
           </td>
           <td>${unixToDate(item.createdAt)}</td>
           <td class="orderStatus">
@@ -83,6 +90,66 @@ window.onload = function() {
       `
     });
     orderList.innerHTML = str;
+    // 訂單品項
+    const check = document.querySelectorAll('.js-check');
+    check.forEach(function (item) {
+        item.addEventListener('click', checkList);
+    });
+  };
+  // 查看更多訂單狀態
+  function checkList(e){
+    let str = "";
+    orderData.forEach(function(item , idx){
+      let titleStr = "";
+      item.products.forEach(function(str){
+          titleStr += `
+          <li class="d-flex">
+            <span class="flex-basis-2">${str.title}</span>
+            <span class="flex-basis-1 text-center">${str.quantity}</span>
+            <span class="flex-basis-1 text-center">${formatPrice(str.price.toString())}</span>
+          </li>
+          `
+      });
+      str += `
+      <div class="PopPage" id="${idx}">
+        <div class="figure">
+          <div class="PopPage_popup">
+              <div class="PopPage__header">
+                  <span class="flex-basis-2">品項</span>
+                  <span class="flex-basis-1 text-center">數量</span>
+                  <span class="flex-basis-1 text-center">金額</span>
+              </div>
+              <ul class="PopPage__body">
+                  ${titleStr}
+                  <li class="d-flex p-2 justify-end">
+                    <span class="flex-basis-2 text-right">總金額:&nbsp</span>
+                    <span class="flex-basis-1 text-primary text-center">$NT${formatPrice(item.total.toString())}</span>
+                  </li>
+              </ul>
+              <div class="PopPage__footer"><a class="close">確認</a></div>
+          </div>
+        </div>
+      </div>
+      `
+    });
+    modal.innerHTML = str;
+    // modal
+    const PopPage = document.querySelectorAll('.PopPage');
+    const close = document.querySelectorAll('.close');
+    const idx = e.target.getAttribute('data-info');
+    PopPage.forEach(function(item){
+      if (idx === item.getAttribute("id")) {
+        item.classList.add("active");
+      }
+    })
+    close.forEach(function(item){
+      item.addEventListener('click',remove);
+    })
+    function remove(){
+      PopPage.forEach(function(item){
+          item.classList.remove("active");
+      })
+    };
   };
   // 修改單筆訂單狀態
   function editOrderItem(e){

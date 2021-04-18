@@ -180,6 +180,9 @@ body {
   .topBar-menu li:last-child a {
     padding: 15px;
   }
+  .person{
+    display: none;
+  }
 }
 
 .menuToggle {
@@ -788,7 +791,7 @@ body {
 
 .orderPage-list {
   max-width: 1330px;
-  padding: 30px 10px;
+  padding: 60px 15px 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -827,6 +830,7 @@ thead tr{
 .orderPage-table th, .orderPage-table td {
   padding: 10px;
   text-align: center;
+  vertical-align: middle;
   /* border: 1px solid #444444; */
 }
 
@@ -849,25 +853,23 @@ thead tr{
 .delSingleOrder-Btn:hover {
   opacity: 0.8;
 }
-
+.orderInfoMore{
+  padding: 20px 10px;
+  cursor: pointer;
+}
 .orderStatus {
   position: relative;
 }
 
 .orderStatus a {
-  position: absolute;
   padding: 10px;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
   text-align: center;
   font-weight: 400;
   cursor: pointer;
+  text-decoration: none;
 }
 .orderStatus .processed{
   color: #6A33F8;
-  text-decoration: none;
 }
 .orderStatus .untreated{
   color: #C44021;
@@ -920,34 +922,198 @@ thead tr{
 }
 .footer{
   border-top: 1px solid #eeeeee;
-  padding: 15px 0px;
+  padding: 15px;
   background-color: #F8f8f8;
 }
 .container{
-  max-width: 1140px;
+  display: flex;
+  max-width: 1110px;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 767px) {
+  .container{
+    display: block;
+  }
+}
 .footer__log{
   text-decoration: none;
   color: #444444;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+}
+
+
+/*-------------------------*/
+/* PopPage
+---------------------------*/
+.PopPage {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .6s;
+}
+/* .PopPage:target {
+  opacity: 1;
+  visibility: visible;
+} */
+.active{
+  opacity: 1;
+  visibility: visible;
+}
+
+.PopPage .figure {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.PopPage .PopPage_popup{
+  width: 100%;
+  max-width: 550px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px 10px;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.3) translateY(-25%);
+  transition: all 0.6s;
+}
+.PopPage.active .PopPage_popup{
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@media (max-width: 767px) {
+  .PopPage.active .PopPage_popup{
+    max-width: 100%;
+    width: 90%;
+  }
+}
+
+.PopPage .PopPage__header {
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  margin-bottom: .2em;
+  color: #444;
+  z-index: 51;
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #444;
+}
+.PopPage__header span{
+  text-align: left;
+}
+
+.PopPage .PopPage__body{
+  margin: auto;
+  padding: 0px;
+  position: relative;
+  overflow: auto;
+  color: #444;
+  text-align: justify;
+  font-size: 18px;
+  z-index: 51;
+  max-height: 50vh !important;
+  margin: 20px 0 30px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #F8f8f8;
+}
+.PopPage__body li{
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+.PopPage__footer{
+  background-color: #fff;
+}
+.PopPage .close {
+  height: auto;
+  display: inline-block;
+  margin: 0 auto;
+  padding:  10px 60px;
+  border-radius: 15px;
+  font-size: 20px;
+  line-height: 1.5;
+  border-radius: .2rem;
+  background-color: #6A33F8;;
+  z-index: 51;
+  position: relative;
+  z-index: 100;
+  margin: auto;
+  text-decoration: none;
+  color:#fff;
+  cursor: pointer;
+}
+
+.figure::before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
 }
 
 
 /* Utilities */
 .mt-1{
-  margin-top: 4px;
+  margin-top: 4px !important;
 }
 .mr-2{
-  margin-right: 8px;
+  margin-right: 8px !important;
+}
+.p-2{
+  padding: 16px 0 !important;
+}
+.border-bottom-1{
+  border-bottom: 1px solid #444 !important;
 }
 .topBar-menu .active {
   color: #6A33F8;
 }
+.d-block{
+  display: flex !important;
+}
 .d-flex{
-  display: flex;
+  display: flex !important;
+}
+.justify-end{
+  justify-content: flex-end !important;
+}
+.flex-basis-2{
+  flex-basis: 50%;
+}
+.flex-basis-1{
+  flex-basis: 25%;
+}
+.text-center{
+  text-align: center !important;
+}
+.text-right{
+  text-align: right !important;
+}
+.text-primary{
+  color: #6A33F8;
+  text-decoration: none;
 }
 .text-secondary{
   color: #444444;
