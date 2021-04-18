@@ -197,7 +197,13 @@ window.onload = function () {
         idKey.push(item.product.id);
       });
       if (idKey.indexOf(id) >= 0) {
-        alert("產品 已經在購物車內");
+        Swal.fire({
+          title: `產品 已經在購物車內`,
+          icon: "info",
+          showConfirmButton: false,
+          timer: 2500,
+          width: "400px"
+        });
         return;
       }
     } 
@@ -209,8 +215,14 @@ window.onload = function () {
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/carts` , postObj)
     .then(res =>{
+      Swal.fire({
+        title: `加入 購物車 成功`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
       getCarList();
-      alert(`加入 購物車 成功`);
     })
     .catch(err =>{
       console.log(err);
@@ -232,7 +244,13 @@ window.onload = function () {
       numPatch -= 1;
       if (numPatch < 1) {
         numPatch = 1 ;
-        alert("數量不得為0");
+        Swal.fire({
+          title: `數量不得為0`,
+          icon: "info",
+          showConfirmButton: false,
+          timer: 2500,
+          width: "400px"
+        });
         return;
       }
     }
@@ -262,7 +280,13 @@ window.onload = function () {
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts/${deleteId}`)
       .then(res => {
-        alert("刪除 單筆購物車 成功！");
+        Swal.fire({
+          title: `刪除 單筆購物車 成功！`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2500,
+          width: "400px"
+        });
         getCarList();
       })
       .catch(err => {
@@ -272,7 +296,13 @@ window.onload = function () {
   // 刪除所有購物車
   function deleteCartAll() {
     if (cartData.carts.length === 0) {
-      alert("購物車 無商品 ");
+      Swal.fire({
+        title: `購物車 無商品`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
       return;
     }
     if (cartData.carts.length >= 1) {
@@ -282,7 +312,13 @@ window.onload = function () {
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts`)
       .then(res => {
-        alert("刪除 全部購物車 成功！");
+        Swal.fire({
+          title: `刪除 全部購物車 成功！`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2500,
+          width: "400px"
+        });
         getCarList();
       })
       .catch(err => {
@@ -294,7 +330,13 @@ window.onload = function () {
   function orderCheck(e) {
     e.preventDefault();
     if (cartData.carts.length === 0) {
-      alert("請加入 至少一個 購物車品項！");
+      Swal.fire({
+        title: `請加入 至少一個 購物車品項！`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "450px"
+      });
       return;
     }
     if (
@@ -304,7 +346,13 @@ window.onload = function () {
       orderAddress.value === "" &&
       orderPayment.value === ""
     ) {
-      alert("請輸入 完整資料");
+      Swal.fire({
+        title: `請輸入 完整資料`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
     }
     // 驗證
     let errors = validate(form, constraints);
@@ -339,7 +387,13 @@ window.onload = function () {
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/orders`, orderObj)
       .then(res => {
-        alert("訂單建立 成功!");
+        Swal.fire({
+          title: `訂單建立 成功!`,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2500,
+          width: "400px"
+        });
         getCarList();
         form.reset();
       })

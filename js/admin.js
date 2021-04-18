@@ -168,7 +168,13 @@ window.onload = function() {
     }
     axios.put(`${url}/api/livejs/v1/admin/${apiPath}/orders/`, putObj , tokenObj)
     .then(function (res) {
-      alert("修改 狀態成功")
+      Swal.fire({
+        title: `修改 訂單狀態 成功`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
@@ -184,7 +190,13 @@ window.onload = function() {
     }
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders/${deleteId}`, tokenObj)
     .then(function (res) {
-      alert("刪除 單筆訂單 成功")
+      Swal.fire({
+        title: `刪除 單筆訂單 成功`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
@@ -196,7 +208,13 @@ window.onload = function() {
     if (orderData.length === 0) return;
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders`, tokenObj)
     .then(function (res) {
-      alert("刪除 全部訂單 成功")
+      Swal.fire({
+        title: `刪除 全部訂單 成功`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2500,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
