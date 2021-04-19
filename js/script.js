@@ -69,7 +69,6 @@ window.onload = function () {
   let productData = [];
   let cartData = [];
 
-
   /*** 函式處理 ***/
   // 初始化
   function init() {
@@ -91,6 +90,10 @@ window.onload = function () {
   };
   // renderList
   function renderList(data) {
+    // 價格排序
+    data.sort(function(a, b){
+      return a.price - b.price ;
+    })
     let str = "";
     data.forEach(function (item) {
       str += `
@@ -99,8 +102,8 @@ window.onload = function () {
         <img src="${item.images}" alt="${item.title}">
         <a href="javascript:;" data-id="${item.id}" data-action="addCard" id="addCardBtn">加入購物車</a>
         <h3 title="${item.description}">${item.title}</h3>
-        <del class="originPrice">NT$${formatPrice(item.origin_price.toString())}</del>
-        <p class="nowPrice">NT$${formatPrice(item.price.toString())}</p>
+        <del class="originPrice">NT$${toThousands(item.origin_price)}</del>
+        <p class="nowPrice">NT$${toThousands(item.price)}</p>
       </li>
       `
     });
@@ -133,6 +136,10 @@ window.onload = function () {
   // renderCarts
   function renderCarts(data) {
     if (cartData.carts.length > 0) {
+      // 價格排序
+      data.carts.sort(function(a, b){
+        return a.product.price - b.product.price ;
+      })
       let theadStr = "";
       let str = "";
       theadStr= `
@@ -153,13 +160,13 @@ window.onload = function () {
               <p>${item.product.title}</p>
             </div>
           </td>
-          <td>NT$${formatPrice(item.product.price.toString())}</td>
+          <td>NT$${toThousands(item.product.price)}</td>
           <td>
             <span class="material-icons minus" data-action="minus" data-id="${item.id}">remove</span>
             <input type="text" value="${item.quantity}" class="cardItem__quantity" readonly="readonly">
             <span class="material-icons add" data-action="add" data-id="${item.id}">add</span>
           </td>
-          <td>NT$${formatPrice((item.product.price * item.quantity).toString())}</td>
+          <td>NT$${toThousands(item.product.price * item.quantity)}</td>
           <td class="discardBtn">
             <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
               clear
@@ -170,7 +177,7 @@ window.onload = function () {
       });
       thead.innerHTML = theadStr;
       tbody.innerHTML = str;
-      cartTotal.textContent = `NT$${formatPrice(cartData.finalTotal.toString())}`;
+      cartTotal.textContent = `NT$${toThousands(cartData.finalTotal)}`;
     } else {
       cartTotal.textContent = `NT$ 0`;
       thead.innerHTML = "";
@@ -405,6 +412,4 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
-
-
 

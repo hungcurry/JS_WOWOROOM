@@ -196,7 +196,7 @@ body {
 }
 
 .menuToggle:hover {
-  color: #6A33FF;
+  color: #6A33F8;
 }
 
 @media (max-width: 767px) {
@@ -309,7 +309,7 @@ body {
 }
 
 .compare-table .material-icons {
-  color: #6A33FF;
+  color: #6A33F8;
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
@@ -586,7 +586,7 @@ body {
 }
 
 .productCard a:hover {
-  background-color: #301E5F;
+  background-color: #6A33F8;
 }
 
 .productCard a, .productCard h3 {

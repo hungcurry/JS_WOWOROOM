@@ -41,7 +41,7 @@ window.onload = function() {
   // renderOrder
   function renderOrder(data){
     // 時間排序
-    data = data.sort(function(a, b){
+    data.sort(function(a, b){
       return b.createdAt - a.createdAt;
     })
     let str = "";
@@ -98,7 +98,7 @@ window.onload = function() {
           <li class="d-flex">
             <span class="flex-basis-2">${str.title}</span>
             <span class="flex-basis-1 text-center">${str.quantity}</span>
-            <span class="flex-basis-1 text-center">${formatPrice(str.price.toString())}</span>
+            <span class="flex-basis-1 text-center">${toThousands(str.price)}</span>
           </li>
           `
       });
@@ -115,7 +115,7 @@ window.onload = function() {
                   ${titleStr}
                   <li class="d-flex p-2 justify-end">
                     <span class="flex-basis-2 text-right">總金額:&nbsp</span>
-                    <span class="flex-basis-1 text-primary text-center">$NT${formatPrice(item.total.toString())}</span>
+                    <span class="flex-basis-1 text-primary text-center">$NT${toThousands(item.total)}</span>
                   </li>
               </ul>
               <div class="PopPage__footer"><a class="close">確認</a></div>
