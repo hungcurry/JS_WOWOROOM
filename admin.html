@@ -4,135 +4,134 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第九週主線任務-訂單頁</title>
+    <title>WOWOROOM家居-訂單頁</title>
     <!-- font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
     <link rel="stylesheet" href="./css/style.css">
   </head>
 
-<body>
-  <nav class="topBar">
-    <div class="wrap">
-        <h1><a href="./index.html" class="logo">WOWOROOM</a></h1>
-        <span class="material-icons menuToggle">
-            menu
-        </span>
-        <ul class="topBar-menu">
-            <li><a href="#">後台管理</a></li>
-            <li><a href="#" class="active"><i class="material-icons person">person</i>管理員登入中</a></li>
-        </ul>
-    </div>
-  </nav>
-  <section class="wrap">
-    <div class="flexbox js-chart">
-      <div class="group">
-        <h2 class="section-title categoryChart"></h2>
-        <div id="chart"></div>
+  <body id="js-top">
+    <nav class="topBar">
+      <div class="wrap">
+          <h1><a href="./index.html" class="logo">WOWOROOM</a></h1>
+          <span class="material-icons menuToggle">
+              menu
+          </span>
+          <ul class="topBar-menu">
+              <li><a href="#">後台管理</a></li>
+              <li><a href="#" class="active"><i class="material-icons person">person</i>管理員登入中</a></li>
+          </ul>
       </div>
-      <div class="group">
-        <h2 class="section-title projectChart"></h2>
-        <div id="chart2"></div>
+    </nav>
+    <section class="wrap">
+      <div class="flexbox js-chart">
+        <div class="group">
+          <h2 class="section-title categoryChart"></h2>
+          <div id="chart"></div>
+        </div>
+        <div class="group">
+          <h2 class="section-title projectChart"></h2>
+          <div id="chart2"></div>
+        </div>
       </div>
-    </div>
-  </section>
-  <!-- 產品清單 -->
-  <section class="wrap orderPage-list">
-      <a href="javaScript:;" class="discardAllBtn">清除全部訂單</a>
-      <div class="orderTableWrap">
-          <table class="orderPage-table">
-              <thead>
-                  <tr>
-                      <th>訂單編號</th>
-                      <th>聯絡人</th>
-                      <th>聯絡地址</th>
-                      <th>電子郵件</th>
-                      <th width="80px">類別</th>
-                      <th width="120px">訂單品項</th>
-                      <th >訂單日期</th>
-                      <th width="100px">訂單狀態</th>
-                      <th>操作</th>
-                  </tr>
-              </thead>
-              <tbody class="orderPage-table__tbody">
-                <!-- <tr>
-                  <td>10088377474</td>
-                  <td>
-                    <p>小杰</p>
-                    <p>0912345678</p>
-                  </td>
-                  <td>高雄市前鎮區六合路183巷66號</td>
-                  <td>cccexample@gmail.com</td>
-                  <td>
-                    <p>Louvre 雙人床架</p>
-                  </td>
-                  <td>2021/03/08</td>
-                  <td class="orderStatus">
-                    <a href="#">未處理</a>
-                  </td>
-                  <td>
-                    <input type="button" class="delSingleOrder-Btn" value="刪除">
-                  </td>
-                </tr> -->
-              </tbody>
-          </table>
-      </div>
-  </section>
-  <div class="modal"></div>
-
-  <footer class="footer">
-    <div class="container">
-        <h1><a class="footer__log" href="./index.html">WOWOROOM</a></h1>
-        <p >© 2021 WOWOROOM.All Rights Reserved.</p>
-        <ul class="d-flex">
-            <li class="mr-2">
-                <a href="javaScript:;" class="material-icons text-secondary">facebook</a>
+    </section>
+    <!-- 產品清單 -->
+    <section class="wrap orderPage-list">
+        <a href="javaScript:;" class="discardAllBtn">清除全部訂單</a>
+        <div class="orderTableWrap">
+            <table class="orderPage-table">
+                <thead>
+                    <tr>
+                        <th>訂單編號</th>
+                        <th>聯絡人</th>
+                        <th>聯絡地址</th>
+                        <th>電子郵件</th>
+                        <th width="80px">類別</th>
+                        <th width="120px">訂單品項</th>
+                        <th >訂單日期</th>
+                        <th width="100px">訂單狀態</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="orderPage-table__tbody">
+                  <!-- <tr>
+                    <td>10088377474</td>
+                    <td>
+                      <p>小杰</p>
+                      <p>0912345678</p>
+                    </td>
+                    <td>高雄市前鎮區六合路183巷66號</td>
+                    <td>cccexample@gmail.com</td>
+                    <td>
+                      <p>Louvre 雙人床架</p>
+                    </td>
+                    <td>2021/03/08</td>
+                    <td class="orderStatus">
+                      <a href="#">未處理</a>
+                    </td>
+                    <td>
+                      <input type="button" class="delSingleOrder-Btn" value="刪除">
+                    </td>
+                  </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- modal -->
+    <div class="modal"></div>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+          <h1><a class="footer__log" href="./index.html">WOWOROOM</a></h1>
+          <p >© 2021 WOWOROOM.All Rights Reserved.</p>
+          <ul class="d-flex">
+              <li class="mr-2">
+                  <a href="javaScript:;" class="material-icons text-secondary">facebook</a>
+              </li>
+              <li class="mr-2">
+                <a href="javaScript:;" class="material-icons text-secondary">call</a>
             </li>
-            <li class="mr-2">
-              <a href="javaScript:;" class="material-icons text-secondary">call</a>
-          </li>
-            <li>
-                <a href="javaScript:;" class="material-icons text-secondary">mail_outline</a>
-            </li>
-        </ul>
-    </div>
-  </footer>
-
-  <!-- 預設 JS，請同學不要修改此處 -->
-  <script>
-  let menuOpenBtn = document.querySelector('.menuToggle');
-  let linkBtn = document.querySelectorAll('.topBar-menu a');
-  let menu = document.querySelector('.topBar-menu');
-  menuOpenBtn.addEventListener('click', menuToggle);
-
-  linkBtn.forEach((item) => {
-      item.addEventListener('click', closeMenu);
-  })
-
-  function menuToggle() {
-      if(menu.classList.contains('openMenu')) {
-          menu.classList.remove('openMenu');
-      }else {
-          menu.classList.add('openMenu');
+              <li>
+                  <a href="javaScript:;" class="material-icons text-secondary">mail_outline</a>
+              </li>
+          </ul>
+      </div>
+    </footer>
+    <!-- goTop -->
+    <a class="goTop material-icons" onclick="ScrollTo('js-top')">arrow_upward</a>
+    <script>
+    // ScrollTo
+    function ScrollTo(name) {
+      ScrollToResolver(document.getElementById(name));
+    }
+    function ScrollToResolver(elem) {
+      let jump = parseInt(elem.getBoundingClientRect().top * .2);
+      document.body.scrollTop += jump;
+      document.documentElement.scrollTop += jump;
+      if (!elem.lastjump || elem.lastjump > Math.abs(jump)) {
+        elem.lastjump = Math.abs(jump);
+        setTimeout(function() {
+          ScrollToResolver(elem);
+        }, "30");
+      } else {
+        elem.lastjump = null;
       }
-  }
-  function closeMenu() {
-      menu.classList.remove('openMenu');
-  }
-  </script>
+    }
+    </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="./js/admin.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/utilities.js"></script>
+    <script src="./js/admin.js"></script>
+  </body>
 </html>
 
 

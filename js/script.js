@@ -1,8 +1,6 @@
 console.clear();
 window.onload = function () {
   /*** DOM 與預設變數 ***/
-  const apiPath = 'ooopp42';
-  const url = 'https://hexschoollivejs.herokuapp.com';
   // products
   const productWrap = document.querySelector('.productWrap');
   const productSelect = document.querySelector('.productSelect');
@@ -79,9 +77,6 @@ window.onload = function () {
     getCarList();
   };
   init();
-  function formatPrice(num) {
-    return num.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
   // ====================
   // 顯示前台產品清單
   function getProductList() {
@@ -201,7 +196,7 @@ window.onload = function () {
           title: `產品 已經在購物車內`,
           icon: "info",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
           width: "400px"
         });
         return;
@@ -219,7 +214,7 @@ window.onload = function () {
         title: `加入 購物車 成功`,
         icon: "success",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
       getCarList();
@@ -248,7 +243,7 @@ window.onload = function () {
           title: `數量不得為0`,
           icon: "info",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
           width: "400px"
         });
         return;
@@ -284,7 +279,7 @@ window.onload = function () {
           title: `刪除 單筆購物車 成功！`,
           icon: "error",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
           width: "400px"
         });
         getCarList();
@@ -300,7 +295,7 @@ window.onload = function () {
         title: `購物車 無商品`,
         icon: "info",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
       return;
@@ -316,7 +311,7 @@ window.onload = function () {
           title: `刪除 全部購物車 成功！`,
           icon: "error",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
           width: "400px"
         });
         getCarList();
@@ -334,7 +329,7 @@ window.onload = function () {
         title: `請加入 至少一個 購物車品項！`,
         icon: "info",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "450px"
       });
       return;
@@ -350,7 +345,7 @@ window.onload = function () {
         title: `請輸入 完整資料`,
         icon: "info",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
     }
@@ -391,7 +386,7 @@ window.onload = function () {
           title: `訂單建立 成功!`,
           icon: "success",
           showConfirmButton: false,
-          timer: 2500,
+          timer: 2000,
           width: "400px"
         });
         getCarList();

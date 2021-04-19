@@ -1,9 +1,6 @@
 console.clear();
 window.onload = function() {
   /*** DOM 與預設變數 ***/
-  const apiPath = 'ooopp42';
-  const url = 'https://hexschoollivejs.herokuapp.com';
-  const token = 'ARKZV2RDkgPePxwyRbN09mcoR1s2';
   // orderProducts
   const orderList = document.querySelector('.orderPage-table__tbody');
   const deleteAllOrderBtn = document.querySelector('.discardAllBtn');
@@ -22,13 +19,6 @@ window.onload = function() {
     getOrderList();
   };
   init();
-  function unixToDate(unixTimestamp){
-    let date = new Date(unixTimestamp*1000);
-    return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
-  };
-  function formatPrice(num) {
-    return num.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
   // ====================
   // 取得後台訂單列表
   function getOrderList(){
@@ -50,16 +40,18 @@ window.onload = function() {
   }
   // renderOrder
   function renderOrder(data){
+    // 時間排序
+    data = data.sort(function(a, b){
+      return b.createdAt - a.createdAt;
+    })
     let str = "";
     data.forEach(function(item , idx){
       // 同筆商品字串
       let ary = item.products;
-      // let titleStr = "";
       let categoryStr = "";
       let orderStatus = item.paid ? "已處理" : "未處理";
       let statusClass = item.paid ? "processed" : "untreated";
       ary.forEach(function(str){
-        // titleStr += `<p class="mt-1">${str.title}</p>`
         categoryStr += `<p class="mt-1">${str.category}</p>`
       });
       // content
@@ -172,7 +164,7 @@ window.onload = function() {
         title: `修改 訂單狀態 成功`,
         icon: "success",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
       getOrderList();
@@ -194,7 +186,7 @@ window.onload = function() {
         title: `刪除 單筆訂單 成功`,
         icon: "error",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
       getOrderList();
@@ -212,7 +204,7 @@ window.onload = function() {
         title: `刪除 全部訂單 成功`,
         icon: "error",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2000,
         width: "400px"
       });
       getOrderList();
