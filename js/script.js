@@ -1,8 +1,6 @@
 console.clear();
 window.onload = function () {
   /*** DOM 與預設變數 ***/
-  const apiPath = 'ooopp42';
-  const url = 'https://hexschoollivejs.herokuapp.com';
   // products
   const productWrap = document.querySelector('.productWrap');
   const productSelect = document.querySelector('.productSelect');
@@ -71,7 +69,6 @@ window.onload = function () {
   let productData = [];
   let cartData = [];
 
-
   /*** 函式處理 ***/
   // 初始化
   function init() {
@@ -79,9 +76,6 @@ window.onload = function () {
     getCarList();
   };
   init();
-  function formatPrice(num) {
-    return num.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
   // ====================
   // 顯示前台產品清單
   function getProductList() {
@@ -96,6 +90,10 @@ window.onload = function () {
   };
   // renderList
   function renderList(data) {
+    // 價格排序
+    data.sort(function(a, b){
+      return a.price - b.price ;
+    })
     let str = "";
     data.forEach(function (item) {
       str += `
@@ -104,8 +102,8 @@ window.onload = function () {
         <img src="${item.images}" alt="${item.title}">
         <a href="javascript:;" data-id="${item.id}" data-action="addCard" id="addCardBtn">加入購物車</a>
         <h3 title="${item.description}">${item.title}</h3>
-        <del class="originPrice">NT$${formatPrice(item.origin_price.toString())}</del>
-        <p class="nowPrice">NT$${formatPrice(item.price.toString())}</p>
+        <del class="originPrice">NT$${toThousands(item.origin_price)}</del>
+        <p class="nowPrice">NT$${toThousands(item.price)}</p>
       </li>
       `
     });
@@ -138,16 +136,20 @@ window.onload = function () {
   // renderCarts
   function renderCarts(data) {
     if (cartData.carts.length > 0) {
+      // 價格排序
+      data.carts.sort(function(a, b){
+        return a.product.price - b.product.price ;
+      })
       let theadStr = "";
       let str = "";
-      theadStr= `
-      <tr>
-        <th width="35%">品項</th>
-        <th width="15%">單價</th>
-        <th width="15%">數量</th>
-        <th width="15%">金額</th>
-        <th width="20%"></th>
-      </tr>
+        theadStr= `
+        <tr>
+          <th width="35%">品項</th>
+          <th width="15%">單價</th>
+          <th width="15%">數量</th>
+          <th width="15%">金額</th>
+          <th width="20%"></th>
+        </tr>
       `
       data.carts.forEach(function (item) {
         str += `
@@ -158,13 +160,13 @@ window.onload = function () {
               <p>${item.product.title}</p>
             </div>
           </td>
-          <td>NT$${formatPrice(item.product.price.toString())}</td>
+          <td>NT$${toThousands(item.product.price)}</td>
           <td>
             <span class="material-icons minus" data-action="minus" data-id="${item.id}">remove</span>
             <input type="text" value="${item.quantity}" class="cardItem__quantity" readonly="readonly">
             <span class="material-icons add" data-action="add" data-id="${item.id}">add</span>
           </td>
-          <td>NT$${formatPrice((item.product.price * item.quantity).toString())}</td>
+          <td>NT$${toThousands(item.product.price * item.quantity)}</td>
           <td class="discardBtn">
             <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
               clear
@@ -175,7 +177,7 @@ window.onload = function () {
       });
       thead.innerHTML = theadStr;
       tbody.innerHTML = str;
-      cartTotal.textContent = `NT$${formatPrice(cartData.finalTotal.toString())}`;
+      cartTotal.textContent = `NT$${toThousands(cartData.finalTotal)}`;
     } else {
       cartTotal.textContent = `NT$ 0`;
       thead.innerHTML = "";
@@ -197,7 +199,13 @@ window.onload = function () {
         idKey.push(item.product.id);
       });
       if (idKey.indexOf(id) >= 0) {
-        alert("產品 已經在購物車內");
+        Swal.fire({
+          title: `產品 已經在購物車內`,
+          icon: "info",
+          showConfirmButton: false,
+          timer: 2000,
+          width: "400px"
+        });
         return;
       }
     } 
@@ -209,8 +217,14 @@ window.onload = function () {
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/carts` , postObj)
     .then(res =>{
+      Swal.fire({
+        title: `加入 購物車 成功`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
       getCarList();
-      alert(`加入 購物車 成功`);
     })
     .catch(err =>{
       console.log(err);
@@ -225,6 +239,7 @@ window.onload = function () {
       e.target.dataset.action !== "add") {
       return;
     }
+    // 撈取遠端數量回來
     cartData.carts.forEach(function(item){
       if (patchId === item.id) numPatch = item.quantity
     });
@@ -232,7 +247,13 @@ window.onload = function () {
       numPatch -= 1;
       if (numPatch < 1) {
         numPatch = 1 ;
-        alert("數量不得為0");
+        Swal.fire({
+          title: `數量不得為0`,
+          icon: "info",
+          showConfirmButton: false,
+          timer: 2000,
+          width: "400px"
+        });
         return;
       }
     }
@@ -262,7 +283,13 @@ window.onload = function () {
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts/${deleteId}`)
       .then(res => {
-        alert("刪除 單筆購物車 成功！");
+        Swal.fire({
+          title: `刪除 單筆購物車 成功！`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+          width: "400px"
+        });
         getCarList();
       })
       .catch(err => {
@@ -272,7 +299,13 @@ window.onload = function () {
   // 刪除所有購物車
   function deleteCartAll() {
     if (cartData.carts.length === 0) {
-      alert("購物車 無商品 ");
+      Swal.fire({
+        title: `購物車 無商品`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
       return;
     }
     if (cartData.carts.length >= 1) {
@@ -282,7 +315,13 @@ window.onload = function () {
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts`)
       .then(res => {
-        alert("刪除 全部購物車 成功！");
+        Swal.fire({
+          title: `刪除 全部購物車 成功！`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+          width: "400px"
+        });
         getCarList();
       })
       .catch(err => {
@@ -294,7 +333,13 @@ window.onload = function () {
   function orderCheck(e) {
     e.preventDefault();
     if (cartData.carts.length === 0) {
-      alert("請加入 至少一個 購物車品項！");
+      Swal.fire({
+        title: `請加入 至少一個 購物車品項！`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "450px"
+      });
       return;
     }
     if (
@@ -304,7 +349,13 @@ window.onload = function () {
       orderAddress.value === "" &&
       orderPayment.value === ""
     ) {
-      alert("請輸入 完整資料");
+      Swal.fire({
+        title: `請輸入 完整資料`,
+        icon: "info",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
     }
     // 驗證
     let errors = validate(form, constraints);
@@ -339,7 +390,13 @@ window.onload = function () {
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/orders`, orderObj)
       .then(res => {
-        alert("訂單建立 成功!");
+        Swal.fire({
+          title: `訂單建立 成功!`,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+          width: "400px"
+        });
         getCarList();
         form.reset();
       })

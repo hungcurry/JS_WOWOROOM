@@ -52,6 +52,10 @@ table {
   border-spacing: 0;
 }
 
+* {
+  /* scroll-behavior: smooth; */
+}
+
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -134,6 +138,7 @@ body {
   padding: 20px 24px;
   background-color: #FFFFFF;
   position: relative;
+  cursor: pointer;
 }
 
 .topBar-menu a:hover {
@@ -191,7 +196,7 @@ body {
 }
 
 .menuToggle:hover {
-  color: #6A33FF;
+  color: #6A33F8;
 }
 
 @media (max-width: 767px) {
@@ -216,7 +221,6 @@ body {
 
 .banner {
   position: relative;
-  /* background-image: url("https://github.com/hexschool/js-training/blob/main/%E7%AC%AC%E4%B9%9D%E9%80%B1%E4%B8%BB%E7%B7%9A%E4%BB%BB%E5%8B%99%E5%9C%96%E5%BA%AB/3ewLAKn.png?raw=true"); */
   background-image: url("../images/banner.jpg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -249,6 +253,16 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 60px;
+}
+
+.bedAdvantage li{
+  transition: transform 0.6s;
+  overflow: hidden;
+  background-color: #fff;;
+}
+
+.bedAdvantage li:hover .bedAdvantage-img{
+  transform: scale(1.06);
 }
 
 .bedAdvantage-img {
@@ -304,7 +318,7 @@ body {
 }
 
 .compare-table .material-icons {
-  color: #6A33FF;
+  color: #6A33F8;
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
@@ -581,7 +595,7 @@ body {
 }
 
 .productCard a:hover {
-  background-color: #301E5F;
+  background-color: #6A33F8;
 }
 
 .productCard a, .productCard h3 {
@@ -786,7 +800,7 @@ body {
 }
 
 .orderInfo-btn:hover {
-  background-color: #301E5F;
+  background-color: #6A33F8
 }
 
 .orderPage-list {
@@ -958,10 +972,7 @@ thead tr{
   opacity: 0;
   transition: all .6s;
 }
-/* .PopPage:target {
-  opacity: 1;
-  visibility: visible;
-} */
+
 .active{
   opacity: 1;
   visibility: visible;
@@ -975,6 +986,7 @@ thead tr{
   justify-content: center;
   align-items: center;
 }
+
 .PopPage .PopPage_popup{
   width: 100%;
   max-width: 550px;
@@ -987,6 +999,12 @@ thead tr{
   transform: scale(0.3) translateY(-25%);
   transition: all 0.6s;
 }
+@media (max-width: 767px) {
+  .PopPage.active .PopPage_popup{
+    padding: 20px 10px;
+  }
+}
+
 .PopPage.active .PopPage_popup{
   visibility: visible;
   opacity: 1;
@@ -996,7 +1014,7 @@ thead tr{
 @media (max-width: 767px) {
   .PopPage.active .PopPage_popup{
     max-width: 100%;
-    width: 90%;
+    width: 85%;
   }
 }
 
@@ -1032,6 +1050,12 @@ thead tr{
   padding: 10px;
   background-color: #F8f8f8;
 }
+@media (max-width: 767px) {
+  .PopPage .PopPage__body{
+    margin: 20px 0 20px;
+  }
+}
+
 .PopPage__body li{
   width: 100%;
   height: auto;
@@ -1073,6 +1097,41 @@ thead tr{
   cursor: pointer;
 }
 
+/* goTop*/
+.goTop {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 50px;
+  right: 50px;
+  color: #6A33F8;
+  text-decoration: none;
+  background-color: rgba(255,255,255,0.5);
+  border: 1px solid #adb5bd ;
+  border-color: #6A33F8 ;
+  border-radius: 50% ;
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.75rem ;
+  display: flex ;
+  justify-content: center ;
+  align-items: center ;
+  padding: 5px ;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .goTop {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* sweetAlert*/
+.swal2-title {
+  font-size: 1.4rem !important;
+  font-weight: 400 !important;
+}
 
 /* Utilities */
 .mt-1{

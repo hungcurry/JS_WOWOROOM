@@ -1,9 +1,6 @@
 console.clear();
 window.onload = function() {
   /*** DOM 與預設變數 ***/
-  const apiPath = 'ooopp42';
-  const url = 'https://hexschoollivejs.herokuapp.com';
-  const token = 'ARKZV2RDkgPePxwyRbN09mcoR1s2';
   // orderProducts
   const orderList = document.querySelector('.orderPage-table__tbody');
   const deleteAllOrderBtn = document.querySelector('.discardAllBtn');
@@ -22,13 +19,6 @@ window.onload = function() {
     getOrderList();
   };
   init();
-  function unixToDate(unixTimestamp){
-    let date = new Date(unixTimestamp*1000);
-    return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
-  };
-  function formatPrice(num) {
-    return num.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  }
   // ====================
   // 取得後台訂單列表
   function getOrderList(){
@@ -50,16 +40,18 @@ window.onload = function() {
   }
   // renderOrder
   function renderOrder(data){
+    // 時間排序
+    data.sort(function(a, b){
+      return b.createdAt - a.createdAt;
+    })
     let str = "";
     data.forEach(function(item , idx){
       // 同筆商品字串
       let ary = item.products;
-      // let titleStr = "";
       let categoryStr = "";
       let orderStatus = item.paid ? "已處理" : "未處理";
       let statusClass = item.paid ? "processed" : "untreated";
       ary.forEach(function(str){
-        // titleStr += `<p class="mt-1">${str.title}</p>`
         categoryStr += `<p class="mt-1">${str.category}</p>`
       });
       // content
@@ -106,7 +98,7 @@ window.onload = function() {
           <li class="d-flex">
             <span class="flex-basis-2">${str.title}</span>
             <span class="flex-basis-1 text-center">${str.quantity}</span>
-            <span class="flex-basis-1 text-center">${formatPrice(str.price.toString())}</span>
+            <span class="flex-basis-1 text-center">${toThousands(str.price)}</span>
           </li>
           `
       });
@@ -123,7 +115,7 @@ window.onload = function() {
                   ${titleStr}
                   <li class="d-flex p-2 justify-end">
                     <span class="flex-basis-2 text-right">總金額:&nbsp</span>
-                    <span class="flex-basis-1 text-primary text-center">$NT${formatPrice(item.total.toString())}</span>
+                    <span class="flex-basis-1 text-primary text-center">$NT${toThousands(item.total)}</span>
                   </li>
               </ul>
               <div class="PopPage__footer"><a class="close">確認</a></div>
@@ -147,7 +139,7 @@ window.onload = function() {
     })
     function remove(){
       PopPage.forEach(function(item){
-          item.classList.remove("active");
+        item.classList.remove("active");
       })
     };
   };
@@ -168,7 +160,13 @@ window.onload = function() {
     }
     axios.put(`${url}/api/livejs/v1/admin/${apiPath}/orders/`, putObj , tokenObj)
     .then(function (res) {
-      alert("修改 狀態成功")
+      Swal.fire({
+        title: `修改 訂單狀態 成功`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
@@ -184,7 +182,13 @@ window.onload = function() {
     }
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders/${deleteId}`, tokenObj)
     .then(function (res) {
-      alert("刪除 單筆訂單 成功")
+      Swal.fire({
+        title: `刪除 單筆訂單 成功`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
@@ -196,7 +200,13 @@ window.onload = function() {
     if (orderData.length === 0) return;
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders`, tokenObj)
     .then(function (res) {
-      alert("刪除 全部訂單 成功")
+      Swal.fire({
+        title: `刪除 全部訂單 成功`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+        width: "400px"
+      });
       getOrderList();
     })
     .catch(err =>{
