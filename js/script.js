@@ -142,14 +142,14 @@ window.onload = function () {
       })
       let theadStr = "";
       let str = "";
-      theadStr= `
-      <tr>
-        <th width="35%">品項</th>
-        <th width="15%">單價</th>
-        <th width="15%">數量</th>
-        <th width="15%">金額</th>
-        <th width="20%"></th>
-      </tr>
+        theadStr= `
+        <tr>
+          <th width="35%">品項</th>
+          <th width="15%">單價</th>
+          <th width="15%">數量</th>
+          <th width="15%">金額</th>
+          <th width="20%"></th>
+        </tr>
       `
       data.carts.forEach(function (item) {
         str += `
@@ -239,6 +239,7 @@ window.onload = function () {
       e.target.dataset.action !== "add") {
       return;
     }
+    // 撈取遠端數量回來
     cartData.carts.forEach(function(item){
       if (patchId === item.id) numPatch = item.quantity
     });
@@ -412,4 +413,6 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
+
+
 

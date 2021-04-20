@@ -221,7 +221,6 @@ body {
 
 .banner {
   position: relative;
-  /* background-image: url("https://github.com/hexschool/js-training/blob/main/%E7%AC%AC%E4%B9%9D%E9%80%B1%E4%B8%BB%E7%B7%9A%E4%BB%BB%E5%8B%99%E5%9C%96%E5%BA%AB/3ewLAKn.png?raw=true"); */
   background-image: url("../images/banner.jpg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -254,6 +253,16 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 60px;
+}
+
+.bedAdvantage li{
+  transition: transform 0.6s;
+  overflow: hidden;
+  background-color: #fff;;
+}
+
+.bedAdvantage li:hover .bedAdvantage-img{
+  transform: scale(1.06);
 }
 
 .bedAdvantage-img {
@@ -1046,7 +1055,6 @@ thead tr{
     margin: 20px 0 20px;
   }
 }
-
 
 .PopPage__body li{
   width: 100%;

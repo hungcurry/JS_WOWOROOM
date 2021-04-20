@@ -139,7 +139,7 @@ window.onload = function() {
     })
     function remove(){
       PopPage.forEach(function(item){
-          item.classList.remove("active");
+        item.classList.remove("active");
       })
     };
   };
