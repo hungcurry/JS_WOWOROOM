@@ -1,4 +1,3 @@
-
   // menu 切換
   const menuOpenBtn = document.querySelector('.menuToggle');
   const linkBtn = document.querySelectorAll('.topBar-menu a');
@@ -66,6 +65,17 @@
     },
   });
 
+  // aso
+  AOS.init({
+    offset: 120, 
+    delay: 500, 
+    duration: 800, 
+    easing: 'ease',
+    once: false, 
+    mirror: false, 
+    anchorPlacement: 'top-bottom',
+  });
+
   // util js、元件
   function toThousands(x) {
     let parts = x.toString().split(".");
@@ -77,8 +87,3 @@
     let date = new Date(unixTimestamp*1000);
     return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
   };
-
-
-
-
-

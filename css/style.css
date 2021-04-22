@@ -72,6 +72,7 @@ img {
   display: block;
 }
 
+
 body {
   font-family: 'Noto Sans', sans-serif;
   font-weight: 400;
@@ -211,11 +212,12 @@ body {
   padding: 20px 0;
   font-size: 1.5rem;
   font-weight: 700;
+  position: relative;
 }
 
 @media (max-width: 767px) {
   .logo {
-    padding: 15px;
+    padding: 15px 0;
   }
 }
 
