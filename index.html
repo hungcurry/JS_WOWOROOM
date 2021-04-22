@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="./css/style.css">
   </head>
 
@@ -31,10 +32,45 @@
         </ul>
       </div>
     </nav>
-    <section class="wrap" id="bedAdvantage">
-      <div class="banner">
-        <h2 class="banner-text">窩窩家居<br>跟您一起品味生活</h2>
+    <section class="swiper-outer">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!-- slide1 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper01.jpg">
+                <h2 class="banner-text">窩窩家居<br>跟您一起品味生活</h2>
+              </a>
+            </div>
+          </div>
+          <!-- slide2 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper02.jpg">
+                <h2 class="banner-text">為自己創造<br>恣意坐臥的自在天地</h2>
+              </a>
+            </div>
+          </div>
+          <!-- slide3 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper03.jpg">
+                <h2 class="banner-text">完美家居<br>一切從窩窩開始</h2>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <span class="material-icons button-prev">chevron_left</span>   
+        <span class="material-icons button-next">chevron_right</span>
       </div>
+    </section>
+    <section class="wrap" id="bedAdvantage">
       <h3 class="section-title">床墊優勢</h3>
       <ul class="bedAdvantage">
         <li>
@@ -481,6 +517,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/utilities.js"></script>
     <script src="./js/script.js"></script>

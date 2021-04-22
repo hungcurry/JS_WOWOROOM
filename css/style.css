@@ -219,23 +219,92 @@ body {
   }
 }
 
-.banner {
-  position: relative;
-  background-image: url("../images/banner.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 420px;
+/*-------------------------*/
+/* swiper 
+---------------------------*/
+
+.swiper-outer{
+  max-width: 1400px;
+  margin: 0 auto;
   margin-bottom: 60px;
 }
-
-.banner-text {
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.slider-image{
+  position: relative;
+}
+.banner-text{
   position: absolute;
   color: #FFFFFF;
   font-size: 2rem;
-  left: 50px;
-  bottom: 50px;
+  left: 13%;
+  bottom: 40px;
   font-weight: normal;
+  background-color: rgb(135 126 118 / 71%);
+  padding: 15px 50px;
+}
+.swiper-outer img {
+  object-fit: cover;
+  width: 1110px;
+  height: 420px;
+  display: inline-block !important;
+}
+.swiper-slide-active {
+  z-index: 99
+}
+.button-prev , .button-next{
+  position: absolute;
+  display: block;
+  font-size: 40px;
+  color: #6A33F8;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.432);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  cursor: pointer;
+}
+.swiper-pagination-bullet-active {
+  background: #6A33F8;
+}
+.button-prev{
+  left: 5%;
+}
+.button-next{
+  right: 5%;
+}
+@media screen and (max-width:1024px) {
+  .banner-text{
+    left: 6%;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .swiper-outer {
+    width: 100%;
+  }
+  .swiper-container {
+    /* padding: 0px 15px; */
+  }
+  .banner-text{
+    font-size: 1.8rem;
+    left: 15px;
+    padding: 15px 30px;
+  }
+  .swiper-outer img {
+    width: 100%;
+  }
+  .button-prev{
+    left: 15px;
+  }
+  .button-next{
+    right: 15px;
+  }
 }
 
 .section-title {
@@ -934,6 +1003,11 @@ thead tr{
     margin-bottom: 30px;
   }
 }
+
+/*-------------------------*/
+/* footer
+---------------------------*/
+
 .footer{
   border-top: 1px solid #eeeeee;
   padding: 15px;
@@ -1097,7 +1171,10 @@ thead tr{
   cursor: pointer;
 }
 
-/* goTop*/
+/*-------------------------*/
+/* goTop
+---------------------------*/
+
 .goTop {
   position: fixed;
   width: 50px;
@@ -1118,6 +1195,7 @@ thead tr{
   align-items: center ;
   padding: 5px ;
   cursor: pointer;
+  z-index: 99;
 }
 
 @media (max-width: 767px) {

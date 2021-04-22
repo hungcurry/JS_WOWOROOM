@@ -36,6 +36,36 @@
     }
   }
 
+  // swiper
+  let swiper = new Swiper('.swiper-container', {
+    autoplay: {
+      delay: 3000,//輪播時間:3秒
+      disableOnInteraction: false,
+    },
+    loop: true,
+    loopedSlides: 2,
+    initialSlide: 0, // 第０張先跑
+    centeredSlides: true,
+    slidesPerView: '1',
+    spaceBetween: "-50%",
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.button-next',
+      prevEl: '.button-prev',
+    },
+    effect: 'coverflow',
+    coverflowEffect: {
+      slideShadows: false, // slide 陰影
+      rotate: 0,
+      stretch: 0,
+      depth: 100,
+      modifier: 4,
+    },
+  });
+
   // util js、元件
   function toThousands(x) {
     let parts = x.toString().split(".");
@@ -47,3 +77,8 @@
     let date = new Date(unixTimestamp*1000);
     return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
   };
+
+
+
+
+
