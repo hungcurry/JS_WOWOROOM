@@ -1,4 +1,3 @@
-
   // menu 切換
   const menuOpenBtn = document.querySelector('.menuToggle');
   const linkBtn = document.querySelectorAll('.topBar-menu a');
@@ -35,6 +34,47 @@
       elem.lastjump = null;
     }
   }
+
+  // swiper
+  let swiper = new Swiper('.swiper-container', {
+    autoplay: {
+      delay: 3000,//輪播時間:3秒
+      disableOnInteraction: false,
+    },
+    loop: true,
+    loopedSlides: 2,
+    initialSlide: 0, // 第０張先跑
+    centeredSlides: true,
+    slidesPerView: '1',
+    spaceBetween: "-50%",
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.button-next',
+      prevEl: '.button-prev',
+    },
+    effect: 'coverflow',
+    coverflowEffect: {
+      slideShadows: false, // slide 陰影
+      rotate: 0,
+      stretch: 0,
+      depth: 100,
+      modifier: 4,
+    },
+  });
+
+  // aso
+  AOS.init({
+    offset: 120, 
+    delay: 500, 
+    duration: 800, 
+    easing: 'ease',
+    once: false, 
+    mirror: false, 
+    anchorPlacement: 'top-bottom',
+  });
 
   // util js、元件
   function toThousands(x) {

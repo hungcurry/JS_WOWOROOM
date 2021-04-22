@@ -10,15 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
   </head>
 
   <body id="js-top">
     <nav class="topBar">
       <div class="wrap">
-        <h1><a href="./index.html" class="logo">WOWOROOM</a></h1>
+        <h1>
+          <a href="./index.html" class="logo">WOWOROOM</a>
+        </h1>
         <span class="material-icons menuToggle">
           menu
         </span>
@@ -31,28 +34,63 @@
         </ul>
       </div>
     </nav>
-    <section class="wrap" id="bedAdvantage">
-      <div class="banner">
-        <h2 class="banner-text">窩窩家居<br>跟您一起品味生活</h2>
+    <section class="swiper-outer">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!-- slide1 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper01.jpg">
+                <h2 class="banner-text">窩窩家居<br>跟您一起品味生活</h2>
+              </a>
+            </div>
+          </div>
+          <!-- slide2 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper02.jpg">
+                <h2 class="banner-text">為自己創造<br>恣意坐臥的自在天地</h2>
+              </a>
+            </div>
+          </div>
+          <!-- slide3 -->
+          <div class="swiper-slide">
+            <div class="slider-image">
+              <a href="javascript:;">
+                <img src="./images/swiper03.jpg">
+                <h2 class="banner-text">完美家居<br>一切從窩窩開始</h2>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <span class="material-icons button-prev">chevron_left</span>   
+        <span class="material-icons button-next">chevron_right</span>
       </div>
+    </section>
+    <section class="wrap" id="bedAdvantage">
       <h3 class="section-title">床墊優勢</h3>
       <ul class="bedAdvantage">
-        <li>
+        <li data-aos="fade-left" data-aos-delay="100">
           <img class="bedAdvantage-img" src="./images/bedAdvantage01.jpg" alt="原木料環保">
           <p class="bedAdvantage-text">原木料環保</p>
         </li>
-        <li>
+        <li data-aos="fade-left" data-aos-delay="300">
           <img class="bedAdvantage-img" src="./images/bedAdvantage02.jpg" alt="好收納">
           <p class="bedAdvantage-text">好收納</p>
         </li>
-        <li>
+        <li data-aos="fade-left" data-aos-delay="600">
           <img class="bedAdvantage-img"src="./images/bedAdvantage03.jpg" alt="好組裝">
           <p class="bedAdvantage-text">好組裝</p>
         </li>
       </ul>
     </section>
     <section class="furniture-compare">
-      <div class="wrap">
+      <div class="wrap" data-aos="zoom-in" data-aos-delay="550">
         <h3 class="section-title">家具比較</h3>
         <div class="overflowWrap">
           <table class="compare-table">
@@ -102,7 +140,7 @@
       <div class="wrap">
         <h3 class="section-title">好評推薦</h3>
         <div class="recommendation-wall">
-          <ul class="gallery-top">
+          <ul class="gallery-top" data-aos="fade-right" data-aos-delay="400">
             <li class="recommendation-card">
               <img src="https://i.imgur.com/cXcOLhu.png" alt="">
               <div class="recommend-content">
@@ -171,7 +209,7 @@
               </div>
             </li>
           </ul>
-          <ul class="gallery-bottom">
+          <ul class="gallery-bottom" data-aos="fade-left" data-aos-delay="500">
             <li class="recommendation-card">
               <img src="https://i.imgur.com/BefHmH2.png" alt="">
               <div class="recommend-content">
@@ -245,7 +283,7 @@
         </div>
       </div>
     </section>
-    <section class="transport" id="transport">
+    <section class="transport" id="transport" data-aos="fade-up">
       <h3 class="section-title">運送方式</h3>
       <ul class="transport-intro">
         <li class="transport-card">
@@ -294,7 +332,7 @@
         <option value="收納">收納</option>
         <option value="窗簾">窗簾</option>
       </select>
-      <ul class="productWrap">
+      <ul class="productWrap" data-aos="fade-up">
         <!-- <li class="productCard">
           <h4 class="productType">新品</h4>
           <img
@@ -310,9 +348,9 @@
     <!-- 購物車清單 -->
     <section class="shoppingCart">
       <h3 class="section-title">我的購物車</h3>
-      <div class="overflowWrap">
+      <div class="overflowWrap" data-aos="fade-up" data-aos-delay="2000">
         <table class="shoppingCart-table">
-          <thead class="thead">
+          <thead class="thead" data-aos="">
             <!-- <tr>
               <th width="35%">品項</th>
               <th width="15%">單價</th>
@@ -321,7 +359,7 @@
               <th width="20%"></th>
             </tr> -->
           </thead>
-          <tbody class="tbody">
+          <tbody class="tbody" data-aos="">
             <!-- <tr>
               <td>
                 <div class="cardItem-title">
@@ -358,7 +396,7 @@
     <!-- 訂單 -->
     <section class="orderInfo wrap" id="orderInfo">
       <h3 class="section-title">填寫預訂資料</h3>
-      <form action="" class="orderInfo-form">
+      <form action="" class="orderInfo-form" data-aos="fade-up" data-aos-delay="2500">
 
         <div class="orderInfo-formGroup">
           <label for="customerName" class="orderInfo-label">姓名</label>
@@ -481,6 +519,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/utilities.js"></script>
     <script src="./js/script.js"></script>
