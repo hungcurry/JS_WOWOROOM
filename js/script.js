@@ -168,7 +168,11 @@ window.onload = function () {
           </td>
           <td>NT$${toThousands(item.product.price * item.quantity)}</td>
           <td class="discardBtn">
-            <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
+            <a href="javascript:;" 
+            class="material-icons delete" 
+            data-action="delete" 
+            data-id="${item.id}"
+            data-title="${item.product.title}">
               clear
             </a>
           </td>
@@ -210,13 +214,14 @@ window.onload = function () {
       }
     } 
     let postObj = {
-      "data": {
-        "productId":id,
-        "quantity": numCheck
+      data: {
+        productId: id,
+        quantity: numCheck
       }
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/carts` , postObj)
     .then(res =>{
+      console.log(res.data.carts);
       Swal.fire({
         title: `加入 購物車 成功`,
         icon: "success",
@@ -224,7 +229,8 @@ window.onload = function () {
         timer: 2000,
         width: "400px"
       });
-      getCarList();
+      cartData = res.data;
+      renderCarts(cartData);
     })
     .catch(err =>{
       console.log(err);
@@ -261,14 +267,16 @@ window.onload = function () {
       numPatch += 1;
     }
     let patchObj = {
-      "data": {
-        "id": patchId,
-        "quantity": numPatch
+      data: {
+        id: patchId,
+        quantity: numPatch
       }
     }
     axios.patch(`${url}/api/livejs/v1/customer/${apiPath}/carts` , patchObj)
     .then(res =>{
-      getCarList();
+      console.log(res);
+      cartData = res.data;
+      renderCarts(cartData);
     })
     .catch(err =>{
       console.log(err);
@@ -278,19 +286,21 @@ window.onload = function () {
   // 刪除單筆購物車
   function deleteCartItem(e) {
     let deleteId = e.target.getAttribute("data-id");
+    let title = e.target.getAttribute("data-title");
     if (e.target.dataset.action !== "delete") {
       return;
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts/${deleteId}`)
       .then(res => {
         Swal.fire({
-          title: `刪除 單筆購物車 成功！`,
+          title: `刪除 ${title} 成功！`,
           icon: "error",
           showConfirmButton: false,
           timer: 2000,
-          width: "400px"
+          width: "500px"
         });
-        getCarList();
+        cartData = res.data;
+        renderCarts(cartData);
       })
       .catch(err => {
         console.log(err);
@@ -322,7 +332,8 @@ window.onload = function () {
           timer: 2000,
           width: "400px"
         });
-        getCarList();
+        cartData = res.data;
+        renderCarts(cartData);
       })
       .catch(err => {
         console.log(err);

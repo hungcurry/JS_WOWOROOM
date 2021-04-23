@@ -1261,6 +1261,13 @@ thead tr{
 select{
   background-color: #fff;
 }
+.loading{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 ;
+}
 * {
   /* outline: 1px solid red; */
 }
