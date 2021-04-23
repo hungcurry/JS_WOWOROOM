@@ -76,7 +76,7 @@ window.onload = function() {
             <a href="javascript:;" class="${statusClass}" data-action="status" data-id=${item.id}>${orderStatus}</a>
           </td>
           <td>
-            <input type="button" class="delSingleOrder-Btn" data-id=${item.id} value="刪除">
+            <input type="button" class="delSingleOrder-Btn delete" data-id=${item.id} value="刪除">
           </td>
         </tr>
       `
@@ -85,11 +85,13 @@ window.onload = function() {
     // 訂單品項
     const check = document.querySelectorAll('.js-check');
     check.forEach(function (item) {
-        item.addEventListener('click', checkList);
+        item.addEventListener('click', function(e){
+          checkList(e.target.dataset.info);
+        });
     });
   };
   // 查看更多訂單狀態
-  function checkList(e){
+  function checkList(dataInfo){
     let str = "";
     orderData.forEach(function(item , idx){
       let titleStr = "";
@@ -128,9 +130,8 @@ window.onload = function() {
     // modal
     const PopPage = document.querySelectorAll('.PopPage');
     const close = document.querySelectorAll('.close');
-    const idx = e.target.getAttribute('data-info');
     PopPage.forEach(function(item){
-      if (idx === item.getAttribute("id")) {
+      if (dataInfo === item.getAttribute("id")) {
         item.classList.add("active");
       }
     })
@@ -153,9 +154,9 @@ window.onload = function() {
     else if (e.target.textContent === "未處理")paidStatus = true;
     else paidStatus = false;
     let putObj ={
-      "data": {
-        "id": putId,
-        "paid": paidStatus
+      data: {
+        id: putId,
+        paid: paidStatus
       }
     }
     axios.put(`${url}/api/livejs/v1/admin/${apiPath}/orders/`, putObj , tokenObj)
@@ -177,14 +178,14 @@ window.onload = function() {
   // 刪除單筆訂單
   function deleteOrderItem(e){
     let deleteId = e.target.getAttribute("data-id");
-    if (e.target.getAttribute('class') !== "delSingleOrder-Btn") {
+    if (!e.target.classList.contains("delete")) {
       return;
     }
     axios.delete(`${url}/api/livejs/v1/admin/${apiPath}/orders/${deleteId}`, tokenObj)
     .then(function (res) {
       Swal.fire({
         title: `刪除 單筆訂單 成功`,
-        icon: "error",
+        icon: "success",
         showConfirmButton: false,
         timer: 2000,
         width: "400px"
@@ -202,7 +203,7 @@ window.onload = function() {
     .then(function (res) {
       Swal.fire({
         title: `刪除 全部訂單 成功`,
-        icon: "error",
+        icon: "success",
         showConfirmButton: false,
         timer: 2000,
         width: "400px"

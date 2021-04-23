@@ -294,7 +294,7 @@ window.onload = function () {
       .then(res => {
         Swal.fire({
           title: `刪除 ${title} 成功！`,
-          icon: "error",
+          icon: "success",
           showConfirmButton: false,
           timer: 2000,
           width: "500px"
@@ -327,7 +327,7 @@ window.onload = function () {
       .then(res => {
         Swal.fire({
           title: `刪除 全部購物車 成功！`,
-          icon: "error",
+          icon: "success",
           showConfirmButton: false,
           timer: 2000,
           width: "400px"
@@ -424,6 +424,3 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
-
-
-
