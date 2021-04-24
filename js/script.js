@@ -39,6 +39,7 @@ window.onload = function () {
         tooShort: "請輸入正確的電話號碼"
       },
       format: {
+        // pattern: /^[09]{2}\d{8}$/,
         pattern: "[0-9]+",
         message: "請輸入正確的號碼"
       }
@@ -424,3 +425,5 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
+
+

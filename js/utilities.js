@@ -87,3 +87,18 @@
     let date = new Date(unixTimestamp*1000);
     return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
   };
+
+  // email 字串傳入驗證
+  function validateEmail(mail) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
+      return true
+    }
+    return false;
+  }
+  // 號碼 字串傳入驗證
+  function validatePhone(phone) {
+    if (/^[09]{2}\d{8}$/.test(phone)) {
+      return true
+    }
+    return false;
+  }

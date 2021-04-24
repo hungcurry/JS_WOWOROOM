@@ -136,7 +136,9 @@ window.onload = function() {
       }
     })
     close.forEach(function(item){
-      item.addEventListener('click',remove);
+      item.addEventListener('click', function(){
+        remove();
+      });
     })
     function remove(){
       PopPage.forEach(function(item){
