@@ -366,6 +366,13 @@ body {
   .overflowWrap {
     overflow-x: scroll;
   }
+  .overflowWrap::-webkit-scrollbar{
+    height: 3px;
+    background-color: white;
+  }
+  .overflowWrap::-webkit-scrollbar-thumb{
+    background-color: #6A33F8;
+  }
 }
 
 .compare-table {
@@ -407,6 +414,7 @@ body {
 @media (max-width: 767px) {
   .compare-table {
     width: 500px;
+    margin-bottom: 20px;
   }
   .compare-table th, .compare-table td {
     padding: 10px 0;
@@ -721,7 +729,7 @@ body {
 
 .shoppingCart {
   background-color: #F8F8F8;
-  padding: 60px 0;
+  padding: 60px 15px;
 }
 
 .shoppingCart-table {
@@ -730,6 +738,12 @@ body {
   border-collapse: collapse;
   font-size: 1.25rem;
 }
+@media (max-width: 767px) {
+  .shoppingCart-table {
+    margin-bottom: 20px;
+  }
+}
+
 
 .shoppingCart-table th, .shoppingCart-table td {
   padding: 15px;
@@ -999,6 +1013,23 @@ thead tr{
 .orderTableWrap::-webkit-scrollbar {
   display: none;
 }
+
+@media (max-width: 767px) {
+  .orderPage-table {
+    margin-bottom: 20px;
+  }
+  
+  .orderTableWrap::-webkit-scrollbar{
+    display: block;
+    height: 3px;
+    background-color: white;
+  }
+  .orderTableWrap::-webkit-scrollbar-thumb{
+    background-color: #6A33F8;
+  }
+  
+}
+
 .flexbox{
   display: flex;
   justify-content:space-around;
