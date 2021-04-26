@@ -260,6 +260,9 @@ body {
   z-index: 99
 }
 .button-prev , .button-next{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   position: absolute;
   display: block;
   font-size: 40px;
@@ -536,10 +539,9 @@ body {
 
 @media (max-width: 767px) {
   .transport-intro {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0 15px;
+    justify-content: space-around;
   }
 }
 
@@ -566,6 +568,7 @@ body {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
+    display: none;
   }
 }
 
@@ -612,9 +615,12 @@ body {
 }
 
 @media (max-width: 767px) {
+  .transport-card  {
+    width: 46%;
+  }
   .transport-card .cardImg {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
   }
 }
 
@@ -630,6 +636,12 @@ body {
   border-radius: 5px;
   text-indent: 10px;
   margin-bottom: 30px;
+}
+
+@media (max-width: 540px) {
+  .productSelect {
+    width: 100%;
+  }
 }
 
 .productWrap {
@@ -686,6 +698,7 @@ body {
 @media (max-width: 540px) {
   .productCard {
     width: 100%;
+    margin-right: 0%;
   }
 }
 
