@@ -84,6 +84,7 @@ window.onload = function () {
       .then(res => {
         productData = res.data.products;
         renderList(productData);
+        getCategories();
       })
       .catch(err => {
         console.log(err);
@@ -109,6 +110,23 @@ window.onload = function () {
       `
     });
     productWrap.innerHTML = str;
+  };
+  // 顯示前台select
+  function getCategories(){
+    let ary = productData.map((item)=>{
+      return item.category
+    })
+    aryCategories = ary.filter((category , idx)=>{
+      return ary.indexOf(category) === idx;
+    })
+    // console.log(aryCategories); ["收納", "窗簾", "床架"]
+    let str = '<option value="全部" selected>全部</option>';
+    aryCategories.forEach((item)=>{
+      str+= `
+      <option value="${item}">${item}</option>
+      `
+    })
+    productSelect.innerHTML = str;
   };
   // 篩選前台產品
   function filterProductList(e) {
