@@ -65,17 +65,6 @@
     },
   });
 
-  // aso
-  AOS.init({
-    offset: 120, 
-    delay: 500, 
-    duration: 1000, 
-    easing: 'ease',
-    once: false, 
-    mirror: false, 
-    anchorPlacement: 'top-bottom',
-  });
-
   // util js、元件
   function toThousands(x) {
     let parts = x.toString().split(".");

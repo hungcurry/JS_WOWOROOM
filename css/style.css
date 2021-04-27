@@ -1053,7 +1053,6 @@ thead tr{
 /*-------------------------*/
 /* footer
 ---------------------------*/
-
 .footer{
   border-top: 1px solid #eeeeee;
   padding: 15px;
@@ -1076,8 +1075,43 @@ thead tr{
   color: #444444;
   font-size: 1.1rem;
 }
-
-
+/*-------------------------*/
+/* startLoading
+---------------------------*/
+.startLoading{
+  background:  #6A33F8;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+}
+.startLoading-message{
+  position: relative;
+  display: inline-block;
+}
+.startLoading.loading-fadeOut {
+  display: none !important;
+  opacity: 0;
+  transition: all linear 200ms;
+}
+.loading-letters{
+  font-size: 30px;
+  color: #fff;
+  display: inline-block;
+}
+.loading-line{
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
 /*-------------------------*/
 /* PopPage
 ---------------------------*/
@@ -1092,12 +1126,10 @@ thead tr{
   opacity: 0;
   transition: all .6s;
 }
-
 .active{
   opacity: 1;
   visibility: visible;
 }
-
 .PopPage .figure {
   width: 100%;
   height: 100%;
@@ -1106,7 +1138,6 @@ thead tr{
   justify-content: center;
   align-items: center;
 }
-
 .PopPage .PopPage_popup{
   width: 100%;
   max-width: 550px;
@@ -1124,20 +1155,17 @@ thead tr{
     padding: 20px 10px;
   }
 }
-
 .PopPage.active .PopPage_popup{
   visibility: visible;
   opacity: 1;
   transform: scale(1) translateY(0);
 }
-
 @media (max-width: 767px) {
   .PopPage.active .PopPage_popup{
     max-width: 100%;
     width: 85%;
   }
 }
-
 .PopPage .PopPage__header {
   margin: 0;
   padding: 6px 12px;
@@ -1154,7 +1182,6 @@ thead tr{
 .PopPage__header span{
   text-align: left;
 }
-
 .PopPage .PopPage__body{
   margin: auto;
   padding: 0px;
@@ -1175,7 +1202,6 @@ thead tr{
     margin: 20px 0 20px;
   }
 }
-
 .PopPage__body li{
   width: 100%;
   height: auto;
@@ -1204,7 +1230,6 @@ thead tr{
   color:#fff;
   cursor: pointer;
 }
-
 .figure::before {
   content: "";
   display: block;
@@ -1216,11 +1241,9 @@ thead tr{
   background-color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
 }
-
 /*-------------------------*/
 /* goTop
 ---------------------------*/
-
 .goTop {
   position: fixed;
   width: 50px;
@@ -1243,20 +1266,17 @@ thead tr{
   cursor: pointer;
   z-index: 99;
 }
-
 @media (max-width: 767px) {
   .goTop {
     bottom: 15px;
     right: 15px;
   }
 }
-
 /* sweetAlert*/
 .swal2-title {
   font-size: 1.4rem !important;
   font-weight: 400 !important;
 }
-
 /* Utilities */
 .mt-1{
   margin-top: 4px !important;
@@ -1275,6 +1295,9 @@ thead tr{
 }
 .d-block{
   display: flex !important;
+}
+.d-inline-block{
+  display: inline-block !important;
 }
 .d-flex{
   display: flex !important;
@@ -1305,7 +1328,7 @@ thead tr{
 select{
   background-color: #fff;
 }
-.loading{
+.round-loading{
   width: 100%;
   text-align: center;
   display: flex;

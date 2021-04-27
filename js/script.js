@@ -1,6 +1,9 @@
 console.clear();
 window.onload = function () {
   /*** DOM 與預設變數 ***/
+  // Loading
+  const textWrapper = document.querySelector('.js-loading-letters');
+  const loading = document.querySelector(".js-loading");
   // products
   const productWrap = document.querySelector('.productWrap');
   const productSelect = document.querySelector('.productSelect');
@@ -73,10 +76,61 @@ window.onload = function () {
   /*** 函式處理 ***/
   // 初始化
   function init() {
+    runLoading();
     getProductList();
     getCarList();
   };
   init();
+  // ====================
+  // Loading
+  function runLoading() {
+    segmentationStr = textWrapper.textContent.replace(/\S/g, "<span class='loading-letter d-inline-block'>$&</span>");
+    textWrapper.innerHTML = segmentationStr;
+    /* Anime */
+    let animation = anime.timeline({
+          loop: true
+        })
+        .add({
+            targets: '.loading-line',
+            scaleX: [0, 1],
+            opacity: [0.5, 1],
+            easing: "easeInOutExpo",
+            duration: 900
+        })
+        .add({
+            targets: '.loading-letter',
+            opacity: [0, 1],
+            translateX: [40, 0],
+            translateZ: 0,
+            scaleX: [0.3, 1],
+            easing: "easeOutExpo",
+            duration: 800,
+            offset: '-=1000',
+            delay: (el, i) => 150 + 25 * i
+        })
+        .add({
+            targets: '.block',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+        });
+      setTimeout(function () {
+          // loading 消失
+          loading.classList.add('loading-fadeOut');
+          animation.pause();
+          // aso
+          AOS.init({
+            offset: 120, 
+            delay: 500, 
+            duration: 1000, 
+            easing: 'ease',
+            once: false, 
+            mirror: false, 
+            anchorPlacement: 'top-bottom',
+          });
+      }, 2400);
+  };
   // ====================
   // 顯示前台產品清單
   function getProductList() {
@@ -443,5 +497,3 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
-
-
