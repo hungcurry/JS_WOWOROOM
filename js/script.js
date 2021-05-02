@@ -1,6 +1,9 @@
 console.clear();
 window.onload = function () {
   /*** DOM 與預設變數 ***/
+  // Loading
+  const textWrapper = document.querySelector('.js-loading-letters');
+  const loading = document.querySelector(".js-loading");
   // products
   const productWrap = document.querySelector('.productWrap');
   const productSelect = document.querySelector('.productSelect');
@@ -39,6 +42,7 @@ window.onload = function () {
         tooShort: "請輸入正確的電話號碼"
       },
       format: {
+        // pattern: /^[09]{2}\d{8}$/,
         pattern: "[0-9]+",
         message: "請輸入正確的號碼"
       }
@@ -72,10 +76,61 @@ window.onload = function () {
   /*** 函式處理 ***/
   // 初始化
   function init() {
+    runLoading();
     getProductList();
     getCarList();
   };
   init();
+  // ====================
+  // Loading
+  function runLoading() {
+    segmentationStr = textWrapper.textContent.replace(/\S/g, "<span class='loading-letter d-inline-block'>$&</span>");
+    textWrapper.innerHTML = segmentationStr;
+    /* Anime */
+    let animation = anime.timeline({
+          loop: true
+        })
+        .add({
+            targets: '.loading-line',
+            scaleX: [0, 1],
+            opacity: [0.5, 1],
+            easing: "easeInOutExpo",
+            duration: 900
+        })
+        .add({
+            targets: '.loading-letter',
+            opacity: [0, 1],
+            translateX: [40, 0],
+            translateZ: 0,
+            scaleX: [0.3, 1],
+            easing: "easeOutExpo",
+            duration: 800,
+            offset: '-=1000',
+            delay: (el, i) => 150 + 25 * i
+        })
+        .add({
+            targets: '.block',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+        });
+      setTimeout(function () {
+          // loading 消失
+          loading.classList.add('loading-fadeOut');
+          animation.pause();
+          // aso
+          AOS.init({
+            offset: 120, 
+            delay: 500, 
+            duration: 1000, 
+            easing: 'ease',
+            once: false, 
+            mirror: false, 
+            anchorPlacement: 'top-bottom',
+          });
+      }, 2400);
+  };
   // ====================
   // 顯示前台產品清單
   function getProductList() {
@@ -83,6 +138,7 @@ window.onload = function () {
       .then(res => {
         productData = res.data.products;
         renderList(productData);
+        getCategories();
       })
       .catch(err => {
         console.log(err);
@@ -108,6 +164,23 @@ window.onload = function () {
       `
     });
     productWrap.innerHTML = str;
+  };
+  // 顯示前台select
+  function getCategories(){
+    let ary = productData.map((item)=>{
+      return item.category
+    })
+    aryCategories = ary.filter((category , idx)=>{
+      return ary.indexOf(category) === idx;
+    })
+    // console.log(aryCategories); ["收納", "窗簾", "床架"]
+    let str = '<option value="全部" selected>全部</option>';
+    aryCategories.forEach((item)=>{
+      str+= `
+      <option value="${item}">${item}</option>
+      `
+    })
+    productSelect.innerHTML = str;
   };
   // 篩選前台產品
   function filterProductList(e) {
@@ -168,7 +241,11 @@ window.onload = function () {
           </td>
           <td>NT$${toThousands(item.product.price * item.quantity)}</td>
           <td class="discardBtn">
-            <a href="javascript:;" class="material-icons delete" data-action="delete" data-id="${item.id}">
+            <a href="javascript:;" 
+            class="material-icons delete" 
+            data-action="delete" 
+            data-id="${item.id}"
+            data-title="${item.product.title}">
               clear
             </a>
           </td>
@@ -210,13 +287,14 @@ window.onload = function () {
       }
     } 
     let postObj = {
-      "data": {
-        "productId":id,
-        "quantity": numCheck
+      data: {
+        productId: id,
+        quantity: numCheck
       }
     }
     axios.post(`${url}/api/livejs/v1/customer/${apiPath}/carts` , postObj)
     .then(res =>{
+      console.log(res.data.carts);
       Swal.fire({
         title: `加入 購物車 成功`,
         icon: "success",
@@ -224,7 +302,8 @@ window.onload = function () {
         timer: 2000,
         width: "400px"
       });
-      getCarList();
+      cartData = res.data;
+      renderCarts(cartData);
     })
     .catch(err =>{
       console.log(err);
@@ -261,14 +340,16 @@ window.onload = function () {
       numPatch += 1;
     }
     let patchObj = {
-      "data": {
-        "id": patchId,
-        "quantity": numPatch
+      data: {
+        id: patchId,
+        quantity: numPatch
       }
     }
     axios.patch(`${url}/api/livejs/v1/customer/${apiPath}/carts` , patchObj)
     .then(res =>{
-      getCarList();
+      console.log(res);
+      cartData = res.data;
+      renderCarts(cartData);
     })
     .catch(err =>{
       console.log(err);
@@ -278,19 +359,21 @@ window.onload = function () {
   // 刪除單筆購物車
   function deleteCartItem(e) {
     let deleteId = e.target.getAttribute("data-id");
+    let title = e.target.getAttribute("data-title");
     if (e.target.dataset.action !== "delete") {
       return;
     }
     axios.delete(`${url}/api/livejs/v1/customer/${apiPath}/carts/${deleteId}`)
       .then(res => {
         Swal.fire({
-          title: `刪除 單筆購物車 成功！`,
-          icon: "error",
+          title: `刪除 ${title} 成功！`,
+          icon: "success",
           showConfirmButton: false,
           timer: 2000,
-          width: "400px"
+          width: "500px"
         });
-        getCarList();
+        cartData = res.data;
+        renderCarts(cartData);
       })
       .catch(err => {
         console.log(err);
@@ -317,12 +400,13 @@ window.onload = function () {
       .then(res => {
         Swal.fire({
           title: `刪除 全部購物車 成功！`,
-          icon: "error",
+          icon: "success",
           showConfirmButton: false,
           timer: 2000,
           width: "400px"
         });
-        getCarList();
+        cartData = res.data;
+        renderCarts(cartData);
       })
       .catch(err => {
         console.log(err);
@@ -413,6 +497,3 @@ window.onload = function () {
   deleteAllCartBtn.addEventListener("click", deleteCartAll);
   sendOrder.addEventListener("click", orderCheck);
 };
-
-
-

@@ -65,17 +65,6 @@
     },
   });
 
-  // aso
-  AOS.init({
-    offset: 120, 
-    delay: 500, 
-    duration: 800, 
-    easing: 'ease',
-    once: false, 
-    mirror: false, 
-    anchorPlacement: 'top-bottom',
-  });
-
   // util js、元件
   function toThousands(x) {
     let parts = x.toString().split(".");
@@ -87,3 +76,18 @@
     let date = new Date(unixTimestamp*1000);
     return date.getFullYear() + "/" + (date.getMonth()+1 + "/" + date.getDate());
   };
+
+  // email 字串傳入驗證
+  function validateEmail(mail) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
+      return true
+    }
+    return false;
+  }
+  // 號碼 字串傳入驗證
+  function validatePhone(phone) {
+    if (/^[09]{2}\d{8}$/.test(phone)) {
+      return true
+    }
+    return false;
+  }
